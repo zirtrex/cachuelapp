@@ -9,7 +9,7 @@ A nivel laboral y fiscal nuestra propuesta de innovación rompe con las altas ta
 
 2) Funcionalidad
 
-FRONTED (Sin Accesos):
+.FRONTED (Sin Accesos):
 --
 a) Al iniciar la aplicación ésta deberá mostrar una lista de categorias por ejemplo: Petlovers, Creativos, MilOficios; las cuales no deberían sobrepasar el máximo de tres.
 --
@@ -24,7 +24,7 @@ c) Al elegir la opción 1, el usuario podrá visualizar los trabajos en base a l
 d) Al elegir la opción 2, el usuario podrá visualizar la lista de perfiles de cachueleros (personas que están buscando tener un trabajo temporal). Adicionalmente tendrá un botón para agregar un trabajo.
 NOTA
 --
-BACKED (Con Login):
+.BACKED (Con Login):
 a)
 
 
