@@ -9,7 +9,7 @@ A nivel laboral y fiscal nuestra propuesta de innovación rompe con las altas ta
 
 2) Funcionalidad
 
-.FRONTED (Sin Accesos):
+- FRONTED (Sin Accesos):
 --
 a) Al iniciar la aplicación ésta deberá mostrar una lista de categorias por ejemplo: Petlovers, Creativos, MilOficios; las cuales no deberían sobrepasar el máximo de tres.
 --
@@ -24,8 +24,26 @@ c) Al elegir la opción 1, el usuario podrá visualizar los trabajos en base a l
 d) Al elegir la opción 2, el usuario podrá visualizar la lista de perfiles de cachueleros (personas que están buscando tener un trabajo temporal). Adicionalmente tendrá un botón para agregar un trabajo.
 NOTA
 --
-.BACKED (Con Login):
-a)
+- BACKED (Con Login):
+DEL REGISTRO E INGRESO
+--
+a) Si el usuario no ha iniciado sesión lo redirigirá al formulario de ingreso, en el cual deberá ingresar su correo y contraseña.
+--
+b) Si el usuario no se ha registrado lo redirigirá al formulario de registro, el cual contará con las siguientes opciones: Correo, Clave, Nombres, DNI, Foto de DNI, Enlace a su cuenta de Facebook, Dirección, Etiquetas, Foto de algún recibo de servicio.
+NOTA: Adicionalmente la
+--
+DE LA CREACIÓN DE TRABAJO:
+--
+a) El contratante podrá tener acceso al formulario de registro de empleo que contará con las siguientes opciones: Titulo, Descripción, Remunareción, Horas, Categoría (), Etiquetas.
+--
+DE LA CREACIÓN DEL PERFIL:
+--
+2) El NINI podrá tener acceso al registro del perfil que contará con las siguientes opciones: Titulo, Descripción, Experiencia (ej: Imágenes de carta de recomendacion o trabajos realizados), Rango de precios.
+--
+--
+3) Alcance 
+
+
 
 
 
