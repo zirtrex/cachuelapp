@@ -627,51 +627,6 @@
             "time": "2017-03-01T22:08:02+00:00"
         },
         {
-            "name": "zendframework/zend-skeleton-installer",
-            "version": "0.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-skeleton-installer.git",
-                "reference": "3a819fa3ac0fef121dfdb82d10f13649a41d88ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-skeleton-installer/zipball/3a819fa3ac0fef121dfdb82d10f13649a41d88ed",
-                "reference": "3a819fa3ac0fef121dfdb82d10f13649a41d88ed",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev"
-            },
-            "require-dev": {
-                "composer/composer": "^1.4.1",
-                "malukenho/docheader": "^0.1.5",
-                "mikey179/vfsstream": "^1.6.4",
-                "phpunit/phpunit": "^6.0.8 || ^5.7.15",
-                "zendframework/zend-coding-standard": "~1.0.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Zend\\SkeletonInstaller\\Plugin",
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\SkeletonInstaller\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Installer plugin for Zend Framework skeleton application",
-            "time": "2017-03-10T23:37:26+00:00"
-        },
-        {
             "name": "zendframework/zend-stdlib",
             "version": "3.1.0",
             "source": {
@@ -981,7 +936,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^5.6 || ^7.0"
+        "php": {}
     },
     "platform-dev": []
 }
