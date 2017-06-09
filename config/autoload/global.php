@@ -10,7 +10,12 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
-
 return [
-    // ...
+    'db' => array(
+		'driver' 	=> 'Pdo',
+    	'dsn' 		=> 'mysql:dbname=cachuelapp; host=localhost',
+    	'driver_options' => array(
+    		PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+    	)
+	),
 ];

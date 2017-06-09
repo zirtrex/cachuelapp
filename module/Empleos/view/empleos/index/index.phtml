@@ -1,0 +1,79 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'Listado de Categorías';
+$this->headTitle($title);
+?>
+<h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
+
+<style>
+.vertical-alignls {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+</style>
+
+<div uk-grid>
+
+    <div class="uk-grid uk-text-center" uk-grid>
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align">PetsLovers</h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>
+        <div class="uk-width-1-2">
+            <div class="uk-margin uk-scrollspy-inview uk-animation-slide-right-medium" uk-scrollspy-class="uk-animation-slide-right-medium" style="">
+                <img src="<?= $this->basePath('img/petslovers.jpg') ?>" class="uk-box-shadow-xlarge" alt="">    
+        	</div>
+        </div>
+    </div>
+    
+    <div class="uk-grid uk-text-center" uk-grid>
+    	<div class="uk-width-1-2">
+            <div class="uk-margin uk-scrollspy-inview uk-animation-slide-right-medium" uk-scrollspy-class="uk-animation-slide-right-medium" style="">
+                <img src="<?= $this->basePath('img/petslovers.jpg') ?>" class="uk-box-shadow-xlarge" alt="">    
+        	</div>
+        </div>    	
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align">Creativos</h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>        
+    </div>
+    
+    <div class="uk-grid uk-text-center" uk-grid>
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align">MilOficios</h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>
+        <div class="uk-width-1-2">
+            <div class="uk-margin uk-scrollspy-inview uk-animation-slide-left-medium" uk-scrollspy-class="uk-animation-slide-right-medium" style="">
+                <img src="<?= $this->basePath('img/petslovers.jpg') ?>" class="uk-box-shadow-xlarge" alt="">    
+        	</div>
+        </div>
+    </div>
+
+</div>
+
+<p>
+    <a href="<?= $this->url('empleos', ['action' => 'add']) ?>">Add new album</a>
+</p>
+
+<table class="uk-table">
+<tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($albums as $album) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($album->title) ?></td>
+        <td><?= $this->escapeHtml($album->artist) ?></td>
+        <td>
+            <a href="<?= $this->url('empleos', ['action' => 'edit', 'id' => $album->id]) ?>">Edit</a>
+            <a href="<?= $this->url('empleos', ['action' => 'delete', 'id' => $album->id]) ?>">Delete</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
