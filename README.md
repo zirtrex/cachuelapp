@@ -24,20 +24,18 @@ NOTA: Para las tres categorías se muestran las mismas opciones descritas arriba
 ### BACKED (Con Login):
 
 #### DEL REGISTRO E INGRESO
---
+
 a) Si el usuario no ha iniciado sesión lo redirigirá al formulario de ingreso, en el cual deberá ingresar su correo y contraseña.
---
+
 b) Si el usuario no se ha registrado lo redirigirá al formulario de registro, el cual contará con las siguientes opciones: Correo, Clave, Nombres, DNI, Foto de DNI, Enlace a su cuenta de Facebook, Dirección, Etiquetas, Foto de algún recibo de servicio.
-NOTA: Adicionalmente la
---
+
 #### DE LA CREACIÓN DE TRABAJO:
---
+
 a) El contratante podrá tener acceso al formulario de registro de empleo que contará con las siguientes opciones: Titulo, Descripción, Remunareción, Horas, Categoría (), Etiquetas.
---
+
 #### DE LA CREACIÓN DEL PERFIL:
---
+
 El NINI podrá tener acceso al registro del perfil que contará con las siguientes opciones: Titulo, Descripción, Experiencia (ej: Imágenes de carta de recomendacion o trabajos realizados), Rango de precios.
---
---
+
 ## 3) Alcance 
 
