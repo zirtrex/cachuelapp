@@ -13,11 +13,11 @@ A nivel laboral y fiscal nuestra propuesta de innovación rompe con las altas ta
 
 a) Al iniciar la aplicación ésta deberá mostrar una lista de categorias por ejemplo: Petlovers, Creativos, MilOficios; las cuales no deberían sobrepasar el máximo de tres.
 
-**NOTA: Si el usuario ha iniciado sesión las categorías se muestran en base a sus anteriores preferencias, de lo contrario se mostrarán las categorias más usadas.**
+>NOTA: Si el usuario ha iniciado sesión las categorías se muestran en base a sus anteriores preferencias, de lo contrario se mostrarán las categorias más usadas.
 
 b) Cuando el usuario elige una categoría deberá mostrarse una siguiente pantalla con dos opciones: ¿Quieres ganar dinero? (1) ¿Quiero contratar? (2)
 
-**NOTA: Para las tres categorías se muestran las mismas opciones descritas arriba.**
+>NOTA: Para las tres categorías se muestran las mismas opciones descritas arriba.
 
 c) Al elegir la opción 1, el usuario podrá visualizar los trabajos en base a la categoría anterior, ejemplo: Petlovers. Adicionalmente tendrá un botón para crear un perfil (En caso no haya creado uno aún)
 
