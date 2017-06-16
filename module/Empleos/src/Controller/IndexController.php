@@ -4,34 +4,33 @@ namespace Empleos\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Empleos\Model\AlbumTable;
+use Application\Model\EmpleoTable;
+use Application\Model\UsuarioTable;
 
 class IndexController extends AbstractActionController
 {
-    private $table;
+    private $empleoTable;
+    private $usuarioTable;
     
     // Add this constructor:
-    public function __construct(AlbumTable $table)
+    public function __construct(EmpleoTable $empleoTable, UsuarioTable $usuarioTable)
     {
-        $this->table = $table;
+        $this->empleoTable = $empleoTable;
+        $this->usuarioTable = $usuarioTable;
     }
     
-    public function indexAction()
+    public function listarEmpleosAction()
     {
         return new ViewModel([
-            'albums' => $this->table->fetchAll(),
+            'empleos' => $this->empleoTable->obtenerTodo(),
+        ]);
+    }
+    
+    public function listarTrabajadoresAction()
+    {
+        return new ViewModel([
+            'trabajadores' => $this->usuarioTable->obtenerTodo(),
         ]);
     }
 
-    public function addAction()
-    {
-    }
-
-    public function editAction()
-    {
-    }
-
-    public function deleteAction()
-    {
-    }
 }

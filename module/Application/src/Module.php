@@ -1,5 +1,4 @@
 <?php
-
 namespace Application;
 
 use Zend\Authentication\AuthenticationService;
@@ -9,57 +8,95 @@ use Zend\Session\Container;
 use Zend\Session\SessionManager;
 use Zend\Session\Validator\HttpUserAgent;
 use Zend\Session\Validator\RemoteAddr;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module
 {
+
     const VERSION = '1.1 Dev';
-    
+
     private $auth;
 
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
     }
-    
+
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                Model\EmpleoTable::class => function ($container) {
+                    $tableGateway = $container->get(Model\EmpleoTableGateway::class);
+                    return new Model\EmpleoTable($tableGateway);
+                },
+                Model\EmpleoTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Entity\Empleo());
+                    return new TableGateway('empleo', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\UsuarioTable::class => function ($container) {
+                    $tableGateway = $container->get(Model\UsuarioTableGateway::class);
+                    return new Model\UsuarioTable($tableGateway);
+                },
+                Model\UsuarioTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Entity\Usuario());
+                    return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                }
+            ]
+        ];
+    }
+
     public function onBootstrap(MvcEvent $mvcEvent)
     {
-        $this->bootstrapSession($mvcEvent);
-        $this->auth = $mvcEvent->getApplication()->getServiceManager()->get(AuthenticationService::class);
-        // store user and role in global viewmodel
+        // $this->bootstrapSession($mvcEvent);
+        $this->auth = $mvcEvent->getApplication()
+            ->getServiceManager()
+            ->get(AuthenticationService::class);
+        
         if ($this->auth->hasIdentity()) {
-            // for e.g. store your auth identity into ViewModel
             $mvcEvent->getViewModel()->setVariable('authIdentity', $this->auth->getIdentity());
-            // extend functionality with acl to checkPermission if user has rights to the given route
-            // ...
-        } else {
-            // redirect if auth fails for example back to /login
-            // ..
-        }
+        } else {}
     }
-    
+
     private function bootstrapSession($e)
     {
-        /** @var SessionManager $session */
-        $session = $e->getApplication()->getServiceManager()->get(SessionManager::class);
+        $session = $e->getApplication()
+            ->getServiceManager()
+            ->get(SessionManager::class);
+        
         $session->start();
-        $container = new Container('your_session_name', $session);
+        
+        $container = new Container('session', $session);
+        
         if (isset($container->init)) {
             return;
         }
-        /** @var Request $request */
+        
         $request = $e->getRequest();
         $session->regenerateId(true);
         $container->init = 1;
+        
         $container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
         $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
-        $config = $e->getApplication()->getServiceManager()->get('config');
-        if (!isset($config['session'])) {
+        
+        $config = $e->getApplication()
+            ->getServiceManager()
+            ->get('config');
+        
+        if (! isset($config['session'])) {
             return;
         }
-        if (!isset($config['session_validators'])) {
+        if (! isset($config['session_validators'])) {
             return;
         }
         $chain = $session->getValidatorChain();
+        
         foreach ($config['session_validators'] as $validator) {
             switch ($validator) {
                 case HttpUserAgent::class:
@@ -71,7 +108,10 @@ class Module
                 default:
                     $validator = new $validator();
             }
-            $chain->attach('session.validate', [$validator, 'isValid']);
+            $chain->attach('session.validate', [
+                $validator,
+                'isValid'
+            ]);
         }
     }
 }

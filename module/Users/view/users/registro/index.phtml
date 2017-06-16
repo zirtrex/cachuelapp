@@ -1,0 +1,71 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('action', $this->url('registro', array('controller' => 'index', 'action' => 'registrar')));
+$form->prepare();
+?>
+
+<div class="">
+	<div class="uk-h3"><i uk-icon="icon: unlock"></i>Registrarse</div>
+	<?php echo $this->form()->openTag($form); ?>
+    <div class="uk-margin">
+    
+    	<?php echo $this->formHidden($form->get('session_token')) ?>
+    	
+    	<?php echo $this->formHidden($form->get('csrf')) ?>                
+    
+        <div class="uk-margin">
+        	<?php //echo $this->formLabel($form->get('usuario')) ?>
+            <?php echo $this->formInput($form->get('usuario')); ?>
+            <?php echo $this->formElementErrors()
+                ->setMessageOpenFormat('<div class="uk-badge">')
+                ->setMessageSeparatorString('</div><div class="uk-badge">')
+                ->setMessageCloseString('</div>')
+                ->render($form->get('usuario'));?>
+        </div>
+        <div class="uk-margin">
+           <?php //echo $this->formLabel($form->get('clave')) ?>
+           <?php echo $this->formInput($form->get('clave')); ?>
+           <?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('clave'));?>
+        </div>
+
+			<?php
+                if ($this->messages):
+                    foreach ($this->messages as $msg):
+                        ?>
+                        <div class="uk-badge">                                        
+                            <?php echo $msg; ?>
+                        </div>
+                    <?php
+                    endforeach;
+                endif;
+           	?> 
+        
+        	<?php
+                if ($this->errorMessages):
+                    foreach ($this->errorMessages as $msg):
+                        ?>
+                        <div class="uk-badge">                                        
+                            <?php echo $msg; ?>
+                        </div>
+                    <?php
+                    endforeach;
+                endif;
+           	?>                      	
+           	                
+        
+        <div class="box-footer">                                                               
+            <?php echo $this->formInput($form->get('ingresar')); ?>
+        </div>
+
+    </div>
+                
+	<?php echo $this->form()->closeTag($form);?>
+</div>
+<footer>
+	<a href="<?php echo $this->url('reestablecer-clave');?>">Olvidé mi clave</a>
+	<ul class="list-unstyled list-inline"></ul>
+</footer>

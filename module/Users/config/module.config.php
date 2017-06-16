@@ -8,6 +8,20 @@ return [
     'router' => [
         'routes' => [
             
+            'registro' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/registro[/:action]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\RegistroController::class,
+                        'action' => 'index'
+                    ],
+                ],
+            ],
+            
             'ingresar' => [
                 'type' => Segment::class,
                 'options' => [
@@ -79,6 +93,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\AuthController::class => Factory\Controller\AuthControllerServiceFactory::class,
+            Controller\RegistroController::class => InvokableFactory::class,
         ],
         
         /*'invokables' => [

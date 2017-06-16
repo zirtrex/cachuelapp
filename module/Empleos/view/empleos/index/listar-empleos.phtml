@@ -1,0 +1,28 @@
+<?php // module/Empleos/view/empleos/index/index.phtml: ?>
+
+<p>
+    <a href="<?= $this->url('empleos', ['action' => 'agregar-empleo']) ?>">Quiero crear un empleo</a>
+</p>
+
+<?php if ($this->empleos):?>
+
+    <table class="uk-table">
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php foreach ($this->empleos as $empleo) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($empleo->titulo) ?></td>
+            <td><?= $this->escapeHtml($empleo->descripcion) ?></td>
+            <td>
+                <a href="<?= $this->url('empleos', ['action' => 'postular-empleo', 'codEmpleo' => $empleo->codEmpleo]) ?>">Postular</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    
+<?php else:?>
+	<p>¡No se han encontrado resultados!</p>
+<?php endif;?>

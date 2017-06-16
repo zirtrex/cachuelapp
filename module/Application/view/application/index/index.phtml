@@ -1,15 +1,48 @@
-<div class="jumbotron">
-    <h1>Welcome to <span class="zf-green">Zend Framework</span></h1>
+<?php
+$title = 'Listado de Categorías';
+$this->headTitle($title);
+?>
 
-    <p>
-        Congratulations! You have successfully installed the
-        <a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">ZF Skeleton Application</a>.
-        You are currently running Zend Framework version <?= \Application\Module::VERSION ?>.
-        This skeleton can serve as a simple starting point for you to begin
-        building your application on ZF.
-    </p>
+<h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
 
-    <p><a class="btn btn-success btn-lg" href="https://github.com/zendframework/zendframework" target="_blank">Fork Zend Framework on GitHub &raquo;</a></p>
+<div class="uk-grid">
+
+    <div class="uk-grid uk-text-center" uk-grid>
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align">PetsLovers</h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>
+        <div class="uk-width-1-2">
+            <div class="uk-margin uk-scrollspy-inview uk-animation-slide-right-medium" uk-scrollspy-class="uk-animation-slide-right-medium" style="">
+                <img src="<?= $this->basePath('img/petslovers.jpg') ?>" class="uk-box-shadow-xlarge" alt="">    
+        	</div>
+        </div>
+    </div>
+    
+    <div class="uk-grid uk-text-center" uk-grid>
+    	<div class="uk-width-1-2">
+            <div class="uk-margin uk-scrollspy-inview uk-animation-slide-right-medium" uk-scrollspy-class="uk-animation-slide-right-medium" style="">
+                <img src="<?= $this->basePath('img/petslovers.jpg') ?>" class="uk-box-shadow-xlarge" alt="">    
+        	</div>
+        </div>    	
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align">Creativos</h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>        
+    </div>
+    
+    <div class="uk-grid uk-text-center" uk-grid>
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align">MilOficios</h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>
+        <div class="uk-width-1-2">
+            <div class="uk-margin uk-scrollspy-inview uk-animation-slide-left-medium" uk-scrollspy-class="uk-animation-slide-right-medium" style="">
+                <img src="<?= $this->basePath('img/petslovers.jpg') ?>" class="uk-box-shadow-xlarge" alt="">    
+        	</div>
+        </div>
+    </div>
+
 </div>
 
 

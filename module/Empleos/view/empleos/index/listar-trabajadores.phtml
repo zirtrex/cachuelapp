@@ -1,0 +1,32 @@
+<?php // module/Empleos/view/empleos/index/listar-trabajadores.phtml: ?>
+
+<p>
+    <a href="<?= $this->url('registro') ?>">Quiero trabajar</a>
+</p>
+
+<?php if ($this->trabajadores):?>
+
+    <table class="uk-table">
+        <tr>
+            <th>Nombres</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
+            <th>DNI</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php foreach ($this->trabajadores as $trabajador) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($trabajador->nombres) ?></td>
+            <td><?= $this->escapeHtml($trabajador->primerApellido) ?></td>
+            <td><?= $this->escapeHtml($trabajador->segundoApellido) ?></td>
+            <td><?= $this->escapeHtml($trabajador->numeroDNI) ?></td>
+            <td>
+                <a href="<?= $this->url('trabajadores', ['action' => 'ver-trabajador', 'codTrabajador' => $trabajador->codUsuario]) ?>">Ver Ficha</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    
+<?php else:?>
+	<p>¡No se han encontrado resultados!</p>
+<?php endif;?>
