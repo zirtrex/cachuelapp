@@ -26,7 +26,7 @@ abstract class AbstractActionController extends AbstractController
     /**
      * Default action if none provided
      *
-     * @return array
+     * @return ViewModel
      */
     public function indexAction()
     {
@@ -38,7 +38,7 @@ abstract class AbstractActionController extends AbstractController
     /**
      * Action called if matched action does not exist
      *
-     * @return array
+     * @return ViewModel
      */
     public function notFoundAction()
     {
@@ -60,7 +60,7 @@ abstract class AbstractActionController extends AbstractController
     public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             /**
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
@@ -71,7 +71,7 @@ abstract class AbstractActionController extends AbstractController
         $action = $routeMatch->getParam('action', 'not-found');
         $method = static::getMethodFromAction($action);
 
-        if (!method_exists($this, $method)) {
+        if (! method_exists($this, $method)) {
             $method = 'notFoundAction';
         }
 

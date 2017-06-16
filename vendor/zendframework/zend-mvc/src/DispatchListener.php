@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-mvc for the canonical source repository
+ * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   https://github.com/zendframework/zend-mvc/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Mvc;
@@ -76,6 +74,10 @@ class DispatchListener extends AbstractListenerAggregate
      */
     public function onDispatch(MvcEvent $e)
     {
+        if (null !== $e->getResult()) {
+            return;
+        }
+
         $routeMatch        = $e->getRouteMatch();
         $controllerName    = $routeMatch instanceof RouteMatch
             ? $routeMatch->getParam('controller', 'not-found')
@@ -87,17 +89,34 @@ class DispatchListener extends AbstractListenerAggregate
 
         // Query abstract controllers, too!
         if (! $controllerManager->has($controllerName)) {
-            $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $e, $application);
+            $return = $this->marshalControllerNotFoundEvent(
+                $application::ERROR_CONTROLLER_NOT_FOUND,
+                $controllerName,
+                $e,
+                $application
+            );
             return $this->complete($return, $e);
         }
 
         try {
             $controller = $controllerManager->get($controllerName);
         } catch (Exception\InvalidControllerException $exception) {
-            $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $e, $application, $exception);
+            $return = $this->marshalControllerNotFoundEvent(
+                $application::ERROR_CONTROLLER_INVALID,
+                $controllerName,
+                $e,
+                $application,
+                $exception
+            );
             return $this->complete($return, $e);
         } catch (InvalidServiceException $exception) {
-            $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $e, $application, $exception);
+            $return = $this->marshalControllerNotFoundEvent(
+                $application::ERROR_CONTROLLER_INVALID,
+                $controllerName,
+                $e,
+                $application,
+                $exception
+            );
             return $this->complete($return, $e);
         } catch (\Throwable $exception) {
             $return = $this->marshalBadControllerEvent($controllerName, $e, $application, $exception);
@@ -146,8 +165,14 @@ class DispatchListener extends AbstractListenerAggregate
     {
         $error     = $e->getError();
         $exception = $e->getParam('exception');
-        if ($exception instanceof \Exception || $exception instanceof \Throwable) {  // @TODO clean up once PHP 7 requirement is enforced
-            zend_monitor_custom_event_ex($error, $exception->getMessage(), 'Zend Framework Exception', ['code' => $exception->getCode(), 'trace' => $exception->getTraceAsString()]);
+        // @TODO clean up once PHP 7 requirement is enforced
+        if ($exception instanceof \Exception || $exception instanceof \Throwable) {
+            zend_monitor_custom_event_ex(
+                $error,
+                $exception->getMessage(),
+                'Zend Framework Exception',
+                ['code' => $exception->getCode(), 'trace' => $exception->getTraceAsString()]
+            );
         }
     }
 
@@ -160,7 +185,7 @@ class DispatchListener extends AbstractListenerAggregate
      */
     protected function complete($return, MvcEvent $event)
     {
-        if (!is_object($return)) {
+        if (! is_object($return)) {
             if (ArrayUtils::hasStringKeys($return)) {
                 $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
             }

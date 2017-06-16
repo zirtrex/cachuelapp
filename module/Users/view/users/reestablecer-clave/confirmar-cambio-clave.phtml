@@ -1,0 +1,94 @@
+
+<div class="logo">
+	<img alt="logo Universidad Israel" src="<?php echo $this->basePath('/img/logo_uisrael.png'); ?>"/>	
+	<p style="color: #fff">GP-Syllabus <br><span style="color: #ddd">Seguimiento Académico Universitario</span></p>
+	
+</div>
+
+<div class="box">
+	<div class="header clearfix">
+		<div class="pull-left"><i class="fa fa-sign-in"></i>Cambiar Clave</div>
+	</div>
+	<?php
+		$form = $this->form;
+		$form->setAttributes(array('action' => $this->url('reestablecer-clave', array('action' => 'confirmar-cambio-clave', 'rol' => $this->data['rol'], 'token' => $this->data['token']))));
+		$form->prepare();		
+		echo $this->form()->openTag($form);
+	?>
+	
+	<div class="box-body padding-md">
+                
+		<?php echo $this->formHidden($form->get('csrf')) ?>
+		
+		<?php echo $this->formHidden($form->get('token')) ?>
+		
+		<div class="form-group">
+			<?php //echo $this->formLabel($form->get('nuevaClave')); ?>
+			<?php echo $this->formInput($form->get('nuevaClave')); ?>
+			<?php echo $this->formElementErrors()
+                            ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
+                            ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
+                            ->setMessageCloseString('</div>')
+                            ->render($form->get('nuevaClave'));?>
+			
+		</div>			
+	
+		<div class="form-group">
+		   <?php //echo $this->formLabel($form->get('confirmarNuevaClave')) ?>
+		   <?php echo $this->formInput($form->get('confirmarNuevaClave')); ?>
+		   <?php echo $this->formElementErrors()
+					->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
+					->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
+					->setMessageCloseString('</div>')
+					->render($form->get('confirmarNuevaClave'));?>
+		</div>
+	
+		<div class="form-group">
+		   <?php //echo $this->formLabel($form->get('captcha')) ?>
+		   <?php echo $this->formCaptcha($form->get('captcha')); ?>
+		   <?php echo $this->formElementErrors()
+					->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
+					->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
+					->setMessageCloseString('</div>')
+					->render($form->get('captcha'));?>
+		</div>              	                 
+	
+		<div class="box-footer">                                                               
+			<?php echo $this->formInput($form->get('enviar')); ?>
+		</div>	
+	
+	</div>
+                
+	<?php
+		if ($this->messages):
+			foreach ($this->messages as $msg):
+				?>
+				<div class="padding-md bg-success">                                        
+					<?php echo $msg; ?>
+				</div>
+			<?php
+			endforeach;
+		endif;
+	?>
+	
+	<?php
+		if ($this->errorMessages):
+			foreach ($this->errorMessages as $msg):
+				?>
+				<div class="padding-md bg-danger">                         
+					<?php echo $msg; ?>
+				</div>
+			<?php
+			endforeach;
+		endif;
+	?>
+                
+	<?php echo $this->form()->closeTag($form);?>
+</div>
+
+<footer>
+	<a href="<?php echo $this->url('ingresar');?>">Iniciar sesión</a>
+	<ul class="list-unstyled list-inline"></ul>
+</footer>
+
+

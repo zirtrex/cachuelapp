@@ -5,6 +5,8 @@ namespace Application;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Application\Factory\SessionManagerFactory;
+use Zend\Session\SessionManager;
 
 return [
     'router' => [
@@ -31,11 +33,19 @@ return [
             ],
         ],
     ],
+    
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
         ],
     ],
+    
+    'service_manager' => [
+        'factories' => [
+            SessionManager::class => SessionManagerFactory::class,
+        ],
+    ],
+    
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -44,6 +54,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/login' 			  => __DIR__ . '/../view/layout/layout_login.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',

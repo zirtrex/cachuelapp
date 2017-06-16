@@ -9,7 +9,6 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\Mvc\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception\InvalidServiceException;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -132,15 +131,15 @@ class PluginManager extends AbstractPluginManager
      */
     public function injectController($plugin)
     {
-        if (!is_object($plugin)) {
+        if (! is_object($plugin)) {
             return;
         }
-        if (!method_exists($plugin, 'setController')) {
+        if (! method_exists($plugin, 'setController')) {
             return;
         }
 
         $controller = $this->getController();
-        if (!$controller instanceof DispatchableInterface) {
+        if (! $controller instanceof DispatchableInterface) {
             return;
         }
 
@@ -148,7 +147,7 @@ class PluginManager extends AbstractPluginManager
     }
 
     /**
-     * Validate a plugin (v3)
+     * Validate a plugin
      *
      * {@inheritDoc}
      */
@@ -160,26 +159,6 @@ class PluginManager extends AbstractPluginManager
                 (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
                 $this->instanceOf
             ));
-        }
-    }
-
-    /**
-     * Validate a plugin (v2)
-     *
-     * {@inheritDoc}
-     *
-     * @throws Exception\InvalidPluginException
-     */
-    public function validatePlugin($plugin)
-    {
-        try {
-            $this->validate($plugin);
-        } catch (InvalidServiceException $e) {
-            throw new Exception\InvalidPluginException(
-                $e->getMessage(),
-                $e->getCode(),
-                $e
-            );
         }
     }
 }
