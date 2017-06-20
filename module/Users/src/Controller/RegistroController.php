@@ -8,9 +8,15 @@ class RegistroController extends AbstractActionController
 {
      public function indexAction(){
         
-        return new ViewModel([
-
-        ]);
+         if(!$this->identity()){
+             return new ViewModel([
+             
+             ]);
+         }else{
+             return $this->redirect()->toRoute('home');
+         }
+         
+        
     }
 }
 

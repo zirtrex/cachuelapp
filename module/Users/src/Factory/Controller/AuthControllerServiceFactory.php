@@ -19,12 +19,3 @@ class AuthControllerServiceFactory implements FactoryInterface
         return $controller;
     }
 }
-
-
-
-
-
-
-
-
-

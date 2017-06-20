@@ -21,7 +21,10 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
             'Zend\\Session\\' => 13,
             'Zend\\ServiceManager\\' => 20,
             'Zend\\Router\\' => 12,
+            'Zend\\Mvc\\Plugin\\Prg\\' => 20,
+            'Zend\\Mvc\\Plugin\\Identity\\' => 25,
             'Zend\\Mvc\\Plugin\\FlashMessenger\\' => 31,
+            'Zend\\Mvc\\Plugin\\FilePrg\\' => 24,
             'Zend\\Mvc\\' => 9,
             'Zend\\ModuleManager\\' => 19,
             'Zend\\Math\\' => 10,
@@ -92,9 +95,21 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-router/src',
         ),
+        'Zend\\Mvc\\Plugin\\Prg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mvc-plugin-prg/src',
+        ),
+        'Zend\\Mvc\\Plugin\\Identity\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mvc-plugin-identity/src',
+        ),
         'Zend\\Mvc\\Plugin\\FlashMessenger\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-mvc-plugin-flashmessenger/src',
+        ),
+        'Zend\\Mvc\\Plugin\\FilePrg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mvc-plugin-fileprg/src',
         ),
         'Zend\\Mvc\\' => 
         array (

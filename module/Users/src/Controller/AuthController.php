@@ -50,8 +50,6 @@ class AuthController extends AbstractActionController
 	                         array(
 	                    			'codUsuario'	=> $resultRow->codUsuario,
 	                                'usuario'   	=> $formData['usuario'],
-	                         		'rol'   		=> $resultRow->rol,
-	                         		'estado'   		=> $resultRow->estado,
 	                                'ip_address' 	=> $this->getRequest()->getServer('REMOTE_ADDR'),
 	                                'user_agent'	=> $request->getServer('HTTP_USER_AGENT'),
 	                    	)
@@ -69,7 +67,7 @@ class AuthController extends AbstractActionController
                 }
                 else
                 {
-               		throw new \Exception("La sesión no se pudo completar, intentelo de nuevo."); 	
+               		throw new \Exception("La sesión no se pudo completar, intentelo de nuevo.");
                 }
             }else{
                 //throw new \Exception("Datos no validados correctamente.");
