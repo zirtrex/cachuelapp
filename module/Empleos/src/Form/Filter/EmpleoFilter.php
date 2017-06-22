@@ -47,7 +47,7 @@ class EmpleoFilter extends InputFilter
                     'name' => 'StringLength',
                     'options' => array(
                         'encoding' => 'UTF-8',
-                        'min' => 1,
+                        'min' => 2,
                         'max' => 20
                     )
                 )
@@ -94,7 +94,7 @@ class EmpleoFilter extends InputFilter
                     'options' => array(
                         'encoding' => 'UTF-8',
                         'min' => 10,
-                        'max' => 500
+                        'max' => 2000
                     )
                 )
             )

@@ -52,7 +52,7 @@ class IndexController extends AbstractActionController
                 $form->setInputFilter(new \Empleos\Form\Filter\EmpleoFilter());
                 $form->setData($request->getPost());
     
-                if ($form->isValid()) {//\Zend\Debug\Debug::dump($formData);
+                if ($form->isValid()) {// \Zend\Debug\Debug::dump($form->getData()); return;
                     
                     $empleo = new Empleo();
 
@@ -83,7 +83,7 @@ class IndexController extends AbstractActionController
                 'errorMessages' => $this->flashmessenger()->getErrorMessages()
             ]);
         } else {
-            return $this->redirect()->toRoute('home');
+            return $this->redirect()->toRoute('ingresar');
         }
     }
 
