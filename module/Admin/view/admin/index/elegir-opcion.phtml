@@ -1,0 +1,23 @@
+<?php
+$title = 'Elegir Opción';
+$this->headTitle($title);
+?>
+
+<h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
+
+<div class="uk-grid">
+
+    <div class="uk-grid uk-text-center" uk-grid>
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align"><a href="<?= $this->url('empleos') ?>">¿Quiero ganar dinero?</a></h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>
+        <div class="uk-width-1-2 ">
+            <h2 class="uk-text-middle vertical-align"><a href="<?= $this->url('trabajadores') ?>">¿Quiero contratar?</a></h2>
+            <p class="uk-text-middle vertical-align">Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+        </div>
+    </div>
+
+</div>
+
+

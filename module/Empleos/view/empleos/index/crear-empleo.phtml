@@ -1,0 +1,95 @@
+<?php 
+$form = $this->form;
+$form->setAttribute('action', $this->url('empleos', array('controller' => 'index', 'action' => 'crear-empleo')));
+$form->prepare();
+?>
+
+<div class="">
+	<h3 class="uk-h3"><i uk-icon="icon: bookmark"></i>Registrar Empleo</h3>
+
+	<?php echo $this->form()->openTag($form); ?>
+	
+	<?php echo $this->formHidden($form->get('csrf')) ?>
+	
+	<?php
+        if ($this->messages):
+            foreach ($this->messages as $msg):
+                ?>
+                <div class="uk-label-success uk-padding-small uk-margin"><?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?> 
+	<?php
+        if ($this->errorMessages):
+            foreach ($this->errorMessages as $msg):
+                ?>
+                <div class="uk-label-danger uk-padding-small uk-margin"><?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?>
+	
+    <div class="uk-grid" uk-grid>
+    
+    	<div class="uk-width-1-2@m">
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('titulo')) ?>
+    			<div class="">
+    				<?php echo $this->formInput($form->get('titulo')); ?>
+    				<?php echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="uk-text-danger">')
+                        ->setMessageSeparatorString('</div><div class="uk-text-danger">')
+                        ->setMessageCloseString('</div>')
+                        ->render($form->get('titulo'));?>
+    			</div>
+    		</div>    		
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('remuneracion')) ?>
+    			<div class="">
+    				<?php echo $this->formInput($form->get('remuneracion')); ?>
+    				<?php echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="uk-text-danger">')
+                        ->setMessageSeparatorString('</div><div class="uk-text-danger">')
+                        ->setMessageCloseString('</div>')
+                        ->render($form->get('remuneracion'));?>
+    			</div>
+    		</div>    		
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('horas')) ?>
+    			<div class="">
+    				<?php echo $this->formnumber($form->get('horas')); ?>
+    				<?php echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="uk-text-danger">')
+                        ->setMessageSeparatorString('</div><div class="uk-text-danger">')
+                        ->setMessageCloseString('</div>')
+                        ->render($form->get('horas'));?>
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<div class="uk-width-1-2@m">
+    		<div class="">
+    			<?php echo $this->formLabel($form->get('descripcion')) ?>
+    			<div class="">
+    				<?php echo $this->formtextarea($form->get('descripcion')); ?>
+    				<?php echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="uk-text-danger">')
+                        ->setMessageSeparatorString('</div><div class="uk-text-danger">')
+                        ->setMessageCloseString('</div>')
+                        ->render($form->get('descripcion'));?>
+    			</div>
+    		</div>
+    	</div>	                     	
+
+    </div>
+    
+    <div class="uk-margin">                                                               
+        <?php echo $this->formInput($form->get('crearEmpleo')); ?>
+    </div>
+                
+	<?php echo $this->form()->closeTag($form);?>
+</div>
+<footer>
+	<ul class="list-unstyled list-inline"></ul>
+</footer>

@@ -2,8 +2,8 @@
 namespace Empleos;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Application\Model\EmpleoTable;
-use Application\Model\UsuarioTable;
+use Admin\Model\EmpleoTable;
+use Admin\Model\UsuarioTable;
 
 class Module implements ConfigProviderInterface
 {

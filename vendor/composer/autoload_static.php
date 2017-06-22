@@ -37,9 +37,11 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
             'Zend\\Filter\\' => 12,
             'Zend\\EventManager\\' => 18,
             'Zend\\Escaper\\' => 13,
+            'Zend\\Debug\\' => 11,
             'Zend\\Db\\' => 8,
             'Zend\\Config\\' => 12,
             'Zend\\ComponentInstaller\\' => 24,
+            'Zend\\Captcha\\' => 13,
             'Zend\\Authentication\\' => 20,
             'ZF\\DevelopmentMode\\' => 19,
         ),
@@ -61,8 +63,8 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         ),
         'A' => 
         array (
-            'Application\\' => 12,
             'ApplicationTest\\' => 16,
+            'Admin\\' => 6,
         ),
     );
 
@@ -159,6 +161,10 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
         ),
+        'Zend\\Debug\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-debug/src',
+        ),
         'Zend\\Db\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-db/src',
@@ -170,6 +176,10 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         'Zend\\ComponentInstaller\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-component-installer/src',
+        ),
+        'Zend\\Captcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-captcha/src',
         ),
         'Zend\\Authentication\\' => 
         array (
@@ -195,13 +205,13 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         array (
             0 => __DIR__ . '/../..' . '/module/Empleos/src',
         ),
-        'Application\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/module/Application/src',
-        ),
         'ApplicationTest\\' => 
         array (
             0 => __DIR__ . '/../..' . '/module/Application/test',
+        ),
+        'Admin\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/module/Admin/src',
         ),
     );
 

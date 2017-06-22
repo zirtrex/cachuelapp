@@ -23,7 +23,7 @@ return [
     'Zend\Validator',
     'Zend\Form',
     'Zend\Db',
-    'Application',
+    'Admin',
     'Empleos',
     'Users',
 ];

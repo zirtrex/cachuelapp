@@ -1,8 +1,20 @@
 <?php // module/Empleos/view/empleos/index/index.phtml: ?>
 
 <p>
-    <a href="<?= $this->url('empleos', ['action' => 'agregar-empleo']) ?>">Quiero crear un empleo</a>
+    <a href="<?= $this->url('empleos', ['action' => 'crear-empleo']) ?>">Quiero crear un empleo</a>
 </p>
+
+<hr/>
+
+<?php
+        if ($this->messages):
+            foreach ($this->messages as $msg):
+                ?>
+                <div class="uk-label-success uk-padding-small uk-margin"><?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?>
 
 <?php if ($this->empleos):?>
 
