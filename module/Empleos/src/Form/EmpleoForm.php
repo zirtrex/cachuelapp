@@ -77,6 +77,27 @@ class EmpleoForm extends Form
             )
         ));
         
+        $this->add(
+            array(
+                'name' => 'categoria',
+                "type"     => 'Zend\Form\Element\Select',
+                "options"  => array(
+                    'label' => 'Elige una categoría',
+                    'label_attributes' => array(
+                	   'class' => ''
+                    ),
+                    'value_options' => array(
+                        'PetLovers' => 'PetLovers',
+                        'Creativos' => 'Creativos',
+                        'MilOficios' => 'MilOficios',
+                    ),
+                ),
+                'attributes' => array(
+                    'class' => 'uk-select',
+                ),
+            )
+        );
+        
         $this->add(array(
             'name' => 'descripcion',
             'type' => 'Zend\Form\Element\Textarea',

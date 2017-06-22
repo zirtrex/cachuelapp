@@ -69,6 +69,19 @@ $form->prepare();
     	</div>
     	
     	<div class="uk-width-1-2@m">
+    		
+    		<div class="">
+						<?php echo $this->formLabel($form->get('categoria')) ?>
+						<div class="col-sm-10">
+							<?php echo $this->formSelect($form->get('categoria')); ?>
+							<?php echo $this->formElementErrors()
+	                            ->setMessageOpenFormat('<div class="uk-text-danger">')
+	                            ->setMessageSeparatorString('</div><div class="uk-text-danger">')
+	                            ->setMessageCloseString('</div>')
+	                            ->render($form->get('categoria'));?>
+						</div>
+					</div>
+    	
     		<div class="">
     			<?php echo $this->formLabel($form->get('descripcion')) ?>
     			<div class="">

@@ -4,6 +4,7 @@ namespace Empleos;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Admin\Model\EmpleoTable;
 use Admin\Model\UsuarioTable;
+use Admin\Model\InteraccionTable;
 
 class Module implements ConfigProviderInterface
 {
@@ -20,8 +21,9 @@ class Module implements ConfigProviderInterface
                 Controller\IndexController::class => function ($container) {
                     return new Controller\IndexController(
                         $container->get(EmpleoTable::class),
-                        $container->get(UsuarioTable::class)
-                        );
+                        $container->get(UsuarioTable::class),
+                        $container->get(InteraccionTable::class)
+                    );
                 }
             ]
         ];

@@ -39,6 +39,7 @@ class EmpleoTable
             'titulo'        => $empleo->titulo,
             'remuneracion'  => $empleo->remuneracion,
             'horas'         => $empleo->horas,
+            'categoria'     => $empleo->categoria,
             'descripcion'   => $empleo->descripcion,
             'fechaCreacion' => gmdate("Y-m-d H:i:s",Miscellanea::getHoraLocal(-5)),
         ];

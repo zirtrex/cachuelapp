@@ -47,6 +47,15 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Usuario());
                     return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                },
+                
+                Model\InteraccionTable::class => function ($container) {
+                    $tableGateway = $container->get(Model\InteraccionTableGateway::class);
+                    return new Model\InteraccionTable($tableGateway);
+                },
+                Model\InteraccionTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    return new TableGateway('interaccion', $dbAdapter, null);
                 }
             ]
         ];

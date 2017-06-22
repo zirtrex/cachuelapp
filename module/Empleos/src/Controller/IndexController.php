@@ -7,17 +7,20 @@ use Zend\View\Model\ViewModel;
 use Admin\Model\EmpleoTable;
 use Admin\Model\UsuarioTable;
 use Admin\Entity\Empleo;
+use Admin\Model\InteraccionTable;
 
 class IndexController extends AbstractActionController
 {
     private $empleoTable;
     private $usuarioTable;
+    private $interaccionTable;
     
     // Add this constructor:
-    public function __construct(EmpleoTable $empleoTable, UsuarioTable $usuarioTable)
+    public function __construct(EmpleoTable $empleoTable, UsuarioTable $usuarioTable, InteraccionTable $interaccionTable)
     {
         $this->empleoTable = $empleoTable;
         $this->usuarioTable = $usuarioTable;
+        $this->interaccionTable = $interaccionTable;
     }
     
     public function listarEmpleosAction()
@@ -56,6 +59,14 @@ class IndexController extends AbstractActionController
                     $empleo->exchangeArray($form->getData());
                     
                     $codEmpleo = $this->empleoTable->guardarEmpleo($empleo);
+                    
+                    $interaccion = array(
+                        'codUsuario'    => $this->identity()['codUsuario'],
+                        'codEmpleo'     => $codEmpleo,
+                        'estado'        => "Publico"
+                    );
+                    
+                    $this->interaccionTable->guardarInteracion($interaccion);
                     
                     $this->flashmessenger()->addMessage("Empleo N°" . $codEmpleo . ", agregado correctamente.");
                     
