@@ -1,8 +1,11 @@
 <?php // module/Empleos/view/empleos/index/listar-trabajadores.phtml: ?>
 
-<p>
-    <a href="<?= $this->url('registro') ?>">Quiero trabajar</a>
-</p>
+<?php
+$title = 'Trabajadores';
+$this->headTitle($title);
+?>
+
+<h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
 
 <?php if ($this->trabajadores):?>
 
@@ -11,7 +14,7 @@
             <th>Nombres</th>
             <th>Primer Apellido</th>
             <th>Segundo Apellido</th>
-            <th>DNI</th>
+            <th>Departamento</th>
             <th>&nbsp;</th>
         </tr>
         <?php foreach ($this->trabajadores as $trabajador) : ?>
@@ -19,7 +22,7 @@
             <td><?= $this->escapeHtml($trabajador->nombres) ?></td>
             <td><?= $this->escapeHtml($trabajador->primerApellido) ?></td>
             <td><?= $this->escapeHtml($trabajador->segundoApellido) ?></td>
-            <td><?= $this->escapeHtml($trabajador->numeroDNI) ?></td>
+            <td><?= $this->escapeHtml($trabajador->departamento) ?></td>
             <td>
                 <a href="<?= $this->url('trabajadores', ['action' => 'ver-trabajador', 'codTrabajador' => $trabajador->codUsuario]) ?>">Ver Ficha</a>
             </td>
@@ -30,3 +33,10 @@
 <?php else:?>
 	<p>¡No se han encontrado resultados!</p>
 <?php endif;?>
+
+<hr/>
+
+<p>
+	¿Aún no estás registrado?, <br/>
+    <a href="<?= $this->url('registro') ?>">Registrate para acceder a los empleos</a>
+</p>

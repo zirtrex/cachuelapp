@@ -1,8 +1,11 @@
 <?php // module/Empleos/view/empleos/index/index.phtml: ?>
 
-<p>
-    <a href="<?= $this->url('empleos', ['action' => 'crear-empleo']) ?>">Quiero crear un empleo</a>
-</p>
+<?php
+$title = 'Empleos';
+$this->headTitle($title);
+?>
+
+<h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
 
 <hr/>
 
@@ -29,7 +32,7 @@
             <td><?= $this->escapeHtml($empleo->titulo) ?></td>
             <td><?= $this->escapeHtml($empleo->descripcion) ?></td>
             <td>
-                <a href="<?= $this->url('empleos', ['action' => 'postular-empleo', 'codEmpleo' => $empleo->codEmpleo]) ?>">Postular</a>
+                <a href="<?= $this->url('empleos', ['action' => 'postular-empleo', 'codEmpleo' => $empleo->codEmpleo]) ?>">Ver empleo</a>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -38,3 +41,10 @@
 <?php else:?>
 	<p>¡No se han encontrado resultados!</p>
 <?php endif;?>
+
+<hr/>
+
+<p>
+	¿No encuentras lo que buscas? -<br/>
+    <a href="<?= $this->url('empleos', ['action' => 'crear-empleo']) ?>">Crea tu propio empleo</a>
+</p>
