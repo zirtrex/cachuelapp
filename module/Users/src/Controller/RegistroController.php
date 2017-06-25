@@ -50,7 +50,7 @@ class RegistroController extends AbstractActionController
                     $this->usuarioTable->guardarUsuario($usuario);
                     
                     $this->enviarCorreoConfirmacion($usuario);                        
-                    $this->flashMessenger()->addMessage('Se ha enviado un mensaje a '.$usuario->correo. ', por favor confirmar. Si lo ha recibido verifique la carpeta de spam');
+                    $this->flashMessenger()->addMessage('Se ha enviado un mensaje a '.$usuario->correo. ', por favor confirmar. Si no lo ha recibido aún, verifique la carpeta de spam');
                     return $this->redirect()->toRoute('registro');
                 }
                 //\Zend\Debug\Debug::dump($form->getInputFilter()->getMessages());

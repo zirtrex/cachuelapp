@@ -34,7 +34,7 @@ return [
                 'port' => '587', //2525
                 'connection_config' => array(
                     'username' => 'zirtrex@gmail.com',
-                    'password' => 'ZI#TREXse7en',
+                    'password' => '',
                     'ssl' => 'tls'
                 ),
             ),
