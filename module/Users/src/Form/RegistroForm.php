@@ -11,7 +11,8 @@ class RegistroForm extends Form
         parent::__construct('RegistroForm');
         
         $this->setAttributes(array(
-            'method' => 'post'
+            'method' => 'post',
+            'class' => 'uk-form',
         ));
         
         $this->add(array(
@@ -29,12 +30,12 @@ class RegistroForm extends Form
                 'id' => 'nombres',
                 'placeholder' => 'Ingrese nombre(s)',
                 'required' => 'required',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Nombre(s)',
                 'label_attributes' => array(
-                    'class' => 'col-sm-2 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -46,12 +47,12 @@ class RegistroForm extends Form
                 'id' => 'primerApellido',
                 'placeholder' => 'Ingrese primer apellido',
                 'required' => 'required',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Primer Apellido',
                 'label_attributes' => array(
-                    'class' => 'col-sm-2 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -62,29 +63,29 @@ class RegistroForm extends Form
             'attributes' => array(
                 'id' => 'segundoApellido',
                 'placeholder' => 'Ingrese segundo apellido',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Segundo Apellido',
                 'label_attributes' => array(
-                    'class' => 'col-sm-2 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
         
         $this->add(array(
-            'name' => 'numeroDocumento',
+            'name' => 'numeroDNI',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => array(
-                'id' => 'numeroDocumento',
+                'id' => 'numeroDNI',
                 'placeholder' => 'Ingrese número de documento',
                 'required' => 'required',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Número de documento',
                 'label_attributes' => array(
-                    'class' => 'col-sm-2 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -96,12 +97,12 @@ class RegistroForm extends Form
                 'id' => 'correo',
                 'placeholder' => 'Ingrese correo',
                 'required' => 'required',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Correo',
                 'label_attributes' => array(
-                    'class' => 'col-sm-2 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -112,12 +113,12 @@ class RegistroForm extends Form
             'attributes' => array(
                 'id' => 'celular',
                 'placeholder' => 'Ingrese celular',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Celular',
                 'label_attributes' => array(
-                    'class' => 'col-sm-2 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -128,12 +129,12 @@ class RegistroForm extends Form
             'attributes' => array(
                 'placeholder' => 'Ingrese su usuario',
                 'required' => 'required',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Usuario',
                 'label_attributes' => array(
-                    'class' => 'control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -144,12 +145,12 @@ class RegistroForm extends Form
             'attributes' => array(
                 'required' => 'required',
                 'placeholder' => 'Ingrese su clave',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Nueva clave',
                 'label_attributes' => array(
-                    'class' => 'col-sm-3 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -160,12 +161,12 @@ class RegistroForm extends Form
             'attributes' => array(
                 'required' => 'required',
                 'placeholder' => 'Repita su clave',
-                'class' => 'uk-input uk-form-width-medium'
+                'class' => 'uk-input'
             ),
             'options' => array(
                 'label' => 'Confirmar nueva clave',
                 'label_attributes' => array(
-                    'class' => 'col-sm-3 control-label'
+                    'class' => 'uk-form-label'
                 )
             )
         ));
@@ -193,26 +194,14 @@ class RegistroForm extends Form
          * ));
          */
         
-        $this->add(array(
-            'name' => 'csrf',
-            'type' => 'Zend\Form\Element\Csrf'
-        ));
-        
-        $this->add(array(
-            'name' => 'session_token',
-            'type' => 'hidden',
-            'attributes' => array(
-                'id' => 'session_token'
-            )
-        ));
         
         $this->add(array(
             'name' => 'registrarse',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
                 'value' => 'Registrarse',
-                'class' => 'uk-button',
-                'id' => 'loginbutton'
+                'class' => 'uk-button uk-button-primary',
+                'id' => 'registrarse'
             )
         ));
     }

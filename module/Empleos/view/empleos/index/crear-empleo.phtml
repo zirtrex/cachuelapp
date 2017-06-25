@@ -9,8 +9,6 @@ $form->prepare();
 
 	<?php echo $this->form()->openTag($form); ?>
 	
-	<?php echo $this->formHidden($form->get('csrf')) ?>
-	
 	<?php
         if ($this->messages):
             foreach ($this->messages as $msg):

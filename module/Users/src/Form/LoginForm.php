@@ -54,16 +54,6 @@ class LoginForm extends Form
             'name' => 'csrf',
             'type' => 'Zend\Form\Element\Csrf'
         ));
-        
-        $this->add(
-        		array(
-        				'name' => 'session_token',
-        				'type' => 'hidden',
-        				'attributes' => array(
-        						'id' => 'session_token'
-        				),
-        		)
-        );
  
         $this->add(
             array(
@@ -71,8 +61,8 @@ class LoginForm extends Form
                 'type' => 'Zend\Form\Element\Submit',
                 'attributes' => array(
                     'value' => 'Ingresar',
-                    'class' => 'uk-button',
-                    'id' => 'loginbutton',
+                    'class' => 'uk-button uk-button-primary',
+                    'id' => 'ingresar',
                 ),
             )
         ); 

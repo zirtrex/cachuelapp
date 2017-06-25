@@ -27,7 +27,9 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
             'Zend\\Mvc\\Plugin\\FilePrg\\' => 24,
             'Zend\\Mvc\\' => 9,
             'Zend\\ModuleManager\\' => 19,
+            'Zend\\Mime\\' => 10,
             'Zend\\Math\\' => 10,
+            'Zend\\Mail\\' => 10,
             'Zend\\Loader\\' => 12,
             'Zend\\InputFilter\\' => 17,
             'Zend\\I18n\\' => 10,
@@ -121,9 +123,17 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-modulemanager/src',
         ),
+        'Zend\\Mime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mime/src',
+        ),
         'Zend\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-math/src',
+        ),
+        'Zend\\Mail\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mail/src',
         ),
         'Zend\\Loader\\' => 
         array (

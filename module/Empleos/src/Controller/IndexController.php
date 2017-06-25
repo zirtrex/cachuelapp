@@ -43,7 +43,7 @@ class IndexController extends AbstractActionController
     {
         if ($this->identity()) {
             
-            $form = new \Empleos\Form\EmpleoForm();           
+            $form = new \Empleos\Form\EmpleoForm();
     
             $request = $this->getRequest();
     

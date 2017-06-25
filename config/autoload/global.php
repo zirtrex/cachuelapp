@@ -23,7 +23,24 @@ return [
     
     'session_storage' => [
         'type' => \Zend\Session\Storage\SessionArrayStorage::class,
-    ],    
+    ],
+    
+    'mail' => array(
+        'transport' => array(
+            'options' => array(
+                //'host' => 'mail.yahoo.com',
+                'host' => 'smtp.gmail.com',
+                //'connection_class'  => 'plain',
+                'port' => '587', //2525
+                'connection_config' => array(
+                    'username' => 'zirtrex@gmail.com',
+                    'password' => 'ZI#TREXse7en',
+                    'ssl' => 'tls'
+                ),
+            ),
+        ),
+    ),
+    
 ];
 
 

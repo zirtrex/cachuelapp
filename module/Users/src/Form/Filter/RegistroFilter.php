@@ -2,12 +2,16 @@
 namespace Users\Form\Filter;
 
 use Zend\InputFilter\InputFilter;
+use Zend\Db\Adapter\Adapter;
 
 class RegistroFilter extends InputFilter
 {
+    private $dbAdapter; 
 
-    public function __construct()
+    public function __construct(Adapter $dbAdapter)
     {
+        $this->dbAdapter = $dbAdapter;
+        
         $this->add(array(
             'name' => 'nombres',
             'required' => true,
@@ -78,7 +82,7 @@ class RegistroFilter extends InputFilter
         ));
         
         $this->add(array(
-            'name' => 'numeroDocumento',
+            'name' => 'numeroDNI',
             'required' => true,
             'filters' => array(
                 array(
@@ -93,10 +97,21 @@ class RegistroFilter extends InputFilter
                     'name' => 'StringLength',
                     'options' => array(
                         'encoding' => 'UTF-8',
-                        'min' => 6,
-                        'max' => 12
+                        'min' => 8,
+                        'max' => 8
                     )
-                )
+                ),
+                array(
+                    'name' => 'Zend\Validator\Db\NoRecordExists',
+                    'options' => array(
+                        'table' => 'usuario',
+                        'field' => 'numeroDNI',
+                        'adapter' => $this->dbAdapter,
+                        'messages' => array(
+                            \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'El número de DNI ya existe',
+                        ),
+                    ),
+                ),
             )
         ));
         
@@ -151,7 +166,18 @@ class RegistroFilter extends InputFilter
                         'min' => 8,
                         'max' => 11
                     )
-                )
+                ),
+                array(
+                    'name' => 'Zend\Validator\Db\NoRecordExists',
+                    'options' => array(
+                        'table' => 'usuario',
+                        'field' => 'celular',
+                        'adapter' => $this->dbAdapter,
+                        'messages' => array(
+                            \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'El celular ya existe',
+                        ),
+                    ),
+                ),
             )
         ));
         
@@ -174,7 +200,18 @@ class RegistroFilter extends InputFilter
                         'min' => '4',
                         'max' => '10'
                     )
-                )
+                ),
+                array(
+                    'name' => 'Zend\Validator\Db\NoRecordExists',
+                    'options' => array(
+                        'table' => 'usuario',
+                        'field' => 'usuario',
+                        'adapter' => $this->dbAdapter,
+                        'messages' => array(
+                            \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'El usuario ya existe',
+                        ),
+                    ),
+                ),
             )
         ));
         
@@ -224,7 +261,7 @@ class RegistroFilter extends InputFilter
                 array(
                     'name' => 'Identical',
                     'options' => array(
-                        'token' => 'nuevaClave',
+                        'token' => 'confirmarClave',
                         'messages' => array(
                             \Zend\Validator\Identical::NOT_SAME => 'La nueva clave no coincide.'
                         )
@@ -232,11 +269,7 @@ class RegistroFilter extends InputFilter
                 )
             )
         ));
-        
-        $this->add(array(
-            'name' => 'csrf',
-            'required' => true
-        ));        
+            
         
     }
 }

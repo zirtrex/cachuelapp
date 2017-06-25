@@ -17,7 +17,8 @@
     "zendframework/zend-view" : "^2.9",
     "zendframework/zend-mvc-plugins" : "^1.0",
     "zendframework/zend-captcha" : "^2.7",
-    "zendframework/zend-debug" : "^2.5"
+    "zendframework/zend-debug" : "^2.5",
+    "zendframework/zend-mail" : "2.8.0"
   },
   "license" : "BSD-3-Clause",
   "keywords" : [ "framework", "mvc", "zf" ],

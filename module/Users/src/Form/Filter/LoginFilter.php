@@ -60,9 +60,5 @@ class LoginFilter extends InputFilter
             'required' => true
         ));
         
-        $this->add(array(
-            'name' => 'session_token',
-            'required' => true
-        ));
     }
 }

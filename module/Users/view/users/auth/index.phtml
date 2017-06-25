@@ -4,14 +4,38 @@ $form->setAttribute('action', $this->url('ingresar', array('controller' => 'inde
 $form->prepare();
 ?>
 
-<div class="">
+<div class="uk-container-center">
 	<div class="uk-h3"><i uk-icon="icon: sign-in"></i>Ingresar</div>
+	
 	<?php echo $this->form()->openTag($form); ?>
+	
+	<?php
+        if ($this->messages):
+            foreach ($this->messages as $msg):
+                ?>
+                <div class="uk-label-success uk-padding-small uk-margin"> <?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?>
+	<?php
+        if ($this->errorMessages):
+            foreach ($this->errorMessages as $msg):
+                ?>
+                <div class="uk-label-danger uk-padding-small uk-margin"><?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?>
+	
     <div class="uk-margin">
-    
-    	<?php echo $this->formHidden($form->get('session_token')) ?>
     	
-    	<?php echo $this->formHidden($form->get('csrf')) ?>                
+    	<?php echo $this->formHidden($form->get('csrf')) ?>
+    	<?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('csrf'));?>                
     
         <div class="uk-margin">
         	<?php //echo $this->formLabel($form->get('usuario')) ?>
@@ -30,33 +54,8 @@ $form->prepare();
                     ->setMessageSeparatorString('</div><div class="uk-badge">')
                     ->setMessageCloseString('</div>')
                     ->render($form->get('clave'));?>
-        </div>
+        </div>           	
 
-			<?php
-                if ($this->messages):
-                    foreach ($this->messages as $msg):
-                        ?>
-                        <div class="uk-badge">                                        
-                            <?php echo $msg; ?>
-                        </div>
-                    <?php
-                    endforeach;
-                endif;
-           	?> 
-        
-        	<?php
-                if ($this->errorMessages):
-                    foreach ($this->errorMessages as $msg):
-                        ?>
-                        <div class="uk-badge">                                        
-                            <?php echo $msg; ?>
-                        </div>
-                    <?php
-                    endforeach;
-                endif;
-           	?>                      	
-           	                
-        
         <div class="box-footer">                                                               
             <?php echo $this->formInput($form->get('ingresar')); ?>
         </div>
@@ -66,6 +65,6 @@ $form->prepare();
 	<?php echo $this->form()->closeTag($form);?>
 </div>
 <footer>
-	<a href="<?php echo $this->url('reestablecer-clave');?>">Olvidé mi clave</a>
+	<a href="<?php echo $this->url('registro');?>">Registrarse</a>
 	<ul class="list-unstyled list-inline"></ul>
 </footer>

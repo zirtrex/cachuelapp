@@ -117,11 +117,6 @@ class EmpleoForm extends Form
         ));
         
         $this->add(array(
-            'name' => 'csrf',
-            'type' => 'Zend\Form\Element\Csrf'
-        ));
-        
-        $this->add(array(
             'name' => 'crearEmpleo',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(

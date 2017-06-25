@@ -21,6 +21,9 @@ class Usuario
     public $provincia;
     public $imagenPerfil;
     public $imagenAdicional;
+    public $fechaRegistro;
+    public $tokenRegistro;
+    public $correoConfirmado;
     public $Empleo; //Un usuario puede haber postulado o publicado varios empleos.
 
     public function exchangeArray(array $data)

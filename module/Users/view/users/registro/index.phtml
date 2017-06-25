@@ -1,149 +1,154 @@
 <?php 
 $form = $this->form;
-$form->setAttribute('action', $this->url('registro', array('controller' => 'index', 'action' => 'registrar')));
+$form->setAttribute('action', $this->url('registro', array('controller' => 'index', 'action' => 'index')));
 $form->prepare();
 ?>
 
 <div class="">
 	<div class="uk-h3"><i uk-icon="icon: unlock"></i>Registro</div>
+
 	<?php echo $this->form()->openTag($form); ?>
-    <div class="uk-margin">
-    
-    	<?php echo $this->formHidden($form->get('session_token')) ?>
-    	
-    	<?php echo $this->formHidden($form->get('csrf')) ?>
-    	
-    	<div class="uk-margin">
-			<?php //echo $this->formLabel($form->get('nombres')) ?>
-			<div class="col-sm-10">
-				<?php echo $this->formInput($form->get('nombres')); ?>
-				<?php echo $this->formElementErrors()
-                    ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
-                    ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
-                    ->setMessageCloseString('</div>')
-                    ->render($form->get('nombres'));?>
-			</div>
-		</div>
 	
-		<div class="uk-margin">
-			<?php //echo $this->formLabel($form->get('primerApellido')) ?>
-			<div class="col-sm-10">
-				<?php echo $this->formInput($form->get('primerApellido')); ?>
-				<?php echo $this->formElementErrors()
-                    ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
-                    ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
-                    ->setMessageCloseString('</div>')
-                    ->render($form->get('primerApellido'));?>
-			</div>
-		</div>
-		
-		<div class="uk-margin">
-			<?php //echo $this->formLabel($form->get('segundoApellido')) ?>
-			<div class="col-sm-10">
-				<?php echo $this->formInput($form->get('segundoApellido')); ?>
-				<?php echo $this->formElementErrors()
-                    ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
-                    ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
-                    ->setMessageCloseString('</div>')
-                    ->render($form->get('segundoApellido'));?>
-			</div>
-		</div>
-		
-		<div class="uk-margin">
-			<?php //echo $this->formLabel($form->get('numeroDocumento')) ?>
-			<div class="col-sm-10">
-				<?php echo $this->formInput($form->get('numeroDocumento')); ?>
-				<?php echo $this->formElementErrors()
-                    ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
-                    ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
-                    ->setMessageCloseString('</div>')
-                    ->render($form->get('numeroDocumento'));?>
-			</div>
-		</div>
-		
-		<div class="uk-margin">
-			<?php //echo $this->formLabel($form->get('correo')) ?>
-			<div class="col-sm-10">
-				<?php echo $this->formInput($form->get('correo')); ?>
-				<?php echo $this->formElementErrors()
-                    ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
-                    ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
-                    ->setMessageCloseString('</div>')
-                    ->render($form->get('correo'));?>
-			</div>
-		</div>
-		
-		<div class="uk-margin">
-			<?php //echo $this->formLabel($form->get('celular')) ?>
-			<div class="col-sm-10">
-				<?php echo $this->formInput($form->get('celular')); ?>
-				<?php echo $this->formElementErrors()
-                    ->setMessageOpenFormat('<div class="alert alert-error alert-dismissable">')
-                    ->setMessageSeparatorString('</div><div class="alert alert-error alert-dismissable">')
-                    ->setMessageCloseString('</div>')
-                    ->render($form->get('celular'));?>
-			</div>
-		</div>                
+	<?php
+        if ($this->messages):
+            foreach ($this->messages as $msg):
+                ?>
+                <div class="uk-label-success uk-padding-small uk-margin"> <?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?>
+	<?php
+        if ($this->errorMessages):
+            foreach ($this->errorMessages as $msg):
+                ?>
+                <div class="uk-label-danger uk-padding-small uk-margin"><?php echo $msg; ?></div>
+            <?php
+            endforeach;
+        endif;
+   	?>
+	
+    <div class="uk-grid" uk-grid>
     
-        <div class="uk-margin">
-        	<?php //echo $this->formLabel($form->get('usuario')) ?>
-            <?php echo $this->formInput($form->get('usuario')); ?>
-            <?php echo $this->formElementErrors()
-                ->setMessageOpenFormat('<div class="uk-badge">')
-                ->setMessageSeparatorString('</div><div class="uk-badge">')
-                ->setMessageCloseString('</div>')
-                ->render($form->get('usuario'));?>
-        </div>
-        
-        <div class="uk-margin">
-           <?php //echo $this->formLabel($form->get('clave')) ?>
-           <?php echo $this->formInput($form->get('clave')); ?>
-           <?php echo $this->formElementErrors()
+    	<div class="uk-width-1-2@m">
+    	
+        	<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('nombres')) ?>
+    			<div class="uk-form-controls">
+    				<?php echo $this->formInput($form->get('nombres')); ?>
+				</div>
+				<?php echo $this->formElementErrors()
                     ->setMessageOpenFormat('<div class="uk-badge">')
                     ->setMessageSeparatorString('</div><div class="uk-badge">')
                     ->setMessageCloseString('</div>')
-                    ->render($form->get('clave'));?>
-        </div>
-        
-        <div class="uk-margin">
-           <?php //echo $this->formLabel($form->get('clave')) ?>
-           <?php echo $this->formInput($form->get('confirmarClave')); ?>
-           <?php echo $this->formElementErrors()
+                    ->render($form->get('nombres'));?>    			
+    		</div>
+    	
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('primerApellido')) ?>
+    			<div class="uk-form-controls">
+    				<?php echo $this->formInput($form->get('primerApellido')); ?>
+				</div>
+				<?php echo $this->formElementErrors()
                     ->setMessageOpenFormat('<div class="uk-badge">')
                     ->setMessageSeparatorString('</div><div class="uk-badge">')
                     ->setMessageCloseString('</div>')
-                    ->render($form->get('clave'));?>
-        </div>
+                    ->render($form->get('primerApellido'));?>    			
+    		</div>
+    		
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('segundoApellido')) ?>
+    			<div class="uk-form-controls">
+    				<?php echo $this->formInput($form->get('segundoApellido')); ?>
+				</div>
+				<?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('segundoApellido'));?>    			
+    		</div>
+    		
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('numeroDNI')) ?>
+    			<div class="uk-form-controls">
+    				<?php echo $this->formInput($form->get('numeroDNI')); ?>
+				</div>
+				<?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('numeroDNI'));?>    			
+    		</div>
+    		
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('correo')) ?>
+    			<div class="uk-form-controls">
+    				<?php echo $this->formInput($form->get('correo')); ?>
+    			</div>
+				<?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('correo'));?>    			
+    		</div>
+    		
+		</div>
+		
+		<div class="uk-width-1-2@m">
 
-			<?php
-                if ($this->messages):
-                    foreach ($this->messages as $msg):
-                        ?>
-                        <div class="uk-badge">                                        
-                            <?php echo $msg; ?>
-                        </div>
-                    <?php
-                    endforeach;
-                endif;
-           	?> 
-        
-        	<?php
-                if ($this->errorMessages):
-                    foreach ($this->errorMessages as $msg):
-                        ?>
-                        <div class="uk-badge">                                        
-                            <?php echo $msg; ?>
-                        </div>
-                    <?php
-                    endforeach;
-                endif;
-           	?>                      	
+    		<div class="uk-margin">
+    			<?php echo $this->formLabel($form->get('celular')) ?>
+    			<div class="uk-form-controls">
+    				<?php echo $this->formInput($form->get('celular')); ?>
+				</div>
+				<?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('celular'));?>    			
+    		</div>       
+    
+            <div class="uk-margin">
+            	<?php echo $this->formLabel($form->get('usuario')) ?>
+            	<div class="uk-form-controls">
+                	<?php echo $this->formInput($form->get('usuario')); ?>
+                </div>
+                <?php echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<div class="uk-badge">')
+                    ->setMessageSeparatorString('</div><div class="uk-badge">')
+                    ->setMessageCloseString('</div>')
+                    ->render($form->get('usuario'));?>
+            </div>
+            
+            <div class="uk-margin">
+               <?php echo $this->formLabel($form->get('clave')) ?>
+               <div class="uk-form-controls">
+               	<?php echo $this->formInput($form->get('clave')); ?>
+               </div>
+               <?php echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="uk-badge">')
+                        ->setMessageSeparatorString('</div><div class="uk-badge">')
+                        ->setMessageCloseString('</div>')
+                        ->render($form->get('clave'));?>
+            </div>
+            
+            <div class="uk-margin">
+               <?php echo $this->formLabel($form->get('confirmarClave')) ?>
+               <div class="uk-form-controls">
+               	<?php echo $this->formInput($form->get('confirmarClave')); ?>
+               </div>
+               <?php echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="uk-badge">')
+                        ->setMessageSeparatorString('</div><div class="uk-badge">')
+                        ->setMessageCloseString('</div>')
+                        ->render($form->get('confirmarClave'));?>
+            </div>	
            	                
-        
-        <div class="box-footer">                                                               
-            <?php echo $this->formInput($form->get('registrarse')); ?>
         </div>
-
+    </div>
+    
+    <div class="uk-margin">                                                               
+        <?php echo $this->formInput($form->get('registrarse')); ?>
     </div>
                 
 	<?php echo $this->form()->closeTag($form);?>

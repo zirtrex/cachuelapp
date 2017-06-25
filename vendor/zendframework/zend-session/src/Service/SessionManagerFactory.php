@@ -18,6 +18,7 @@ use Zend\Session\Container;
 use Zend\Session\SaveHandler\SaveHandlerInterface;
 use Zend\Session\SessionManager;
 use Zend\Session\Storage\StorageInterface;
+use Zend\Session\ManagerInterface;
 
 class SessionManagerFactory implements FactoryInterface
 {
@@ -72,7 +73,7 @@ class SessionManagerFactory implements FactoryInterface
 
         if ($container->has(ConfigInterface::class)) {
             $config = $container->get(ConfigInterface::class);
-            if (!$config instanceof ConfigInterface) {
+            if (! $config instanceof ConfigInterface) {
                 throw new ServiceNotCreatedException(sprintf(
                     'SessionManager requires that the %s service implement %s; received "%s"',
                     ConfigInterface::class,
@@ -84,7 +85,7 @@ class SessionManagerFactory implements FactoryInterface
 
         if ($container->has(StorageInterface::class)) {
             $storage = $container->get(StorageInterface::class);
-            if (!$storage instanceof StorageInterface) {
+            if (! $storage instanceof StorageInterface) {
                 throw new ServiceNotCreatedException(sprintf(
                     'SessionManager requires that the %s service implement %s; received "%s"',
                     StorageInterface::class,
@@ -96,7 +97,7 @@ class SessionManagerFactory implements FactoryInterface
 
         if ($container->has(SaveHandlerInterface::class)) {
             $saveHandler = $container->get(SaveHandlerInterface::class);
-            if (!$saveHandler instanceof SaveHandlerInterface) {
+            if (! $saveHandler instanceof SaveHandlerInterface) {
                 throw new ServiceNotCreatedException(sprintf(
                     'SessionManager requires that the %s service implement %s; received "%s"',
                     SaveHandlerInterface::class,
@@ -124,7 +125,16 @@ class SessionManagerFactory implements FactoryInterface
             }
         }
 
-        $manager = new SessionManager($config, $storage, $saveHandler, $validators, $options);
+        $managerClass = class_exists($requestedName) ? $requestedName : SessionManager::class;
+        if (! is_subclass_of($managerClass, ManagerInterface::class)) {
+            throw new ServiceNotCreatedException(sprintf(
+                'SessionManager requires that the %s service implement %s',
+                $managerClass,
+                ManagerInterface::class
+            ));
+        }
+
+        $manager = new $managerClass($config, $storage, $saveHandler, $validators, $options);
 
         // If configuration enables the session manager as the default manager for container
         // instances, do so.

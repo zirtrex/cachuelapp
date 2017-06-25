@@ -79,6 +79,20 @@ return [
                     ],
                 ],
             ],
+            
+            'confirmar-correo' =>[
+                'type'    => Segment::class,
+                'options' => array(
+                    'route'    => '/confirmar-correo[/:token]',
+                    'constraints' => [
+                        'token' => '[a-zA-Z0-9_-]*'
+                    ],
+                    'defaults' => array(
+                        'controller'    => Controller\RegistroController::class,
+                        'action'        => 'confirmarCorreo',
+                    ),
+                ),
+            ],
         ],
         
     ],
@@ -86,14 +100,14 @@ return [
     'service_manager' => [
         'factories' => [
              Storage\AuthStorage::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
-             \Zend\Authentication\AuthenticationService::class => Factory\Storage\AuthenticationServiceFactory::class
+             \Zend\Authentication\AuthenticationService::class => Factory\Storage\AuthenticationServiceFactory::class,
         ],
     ],
     
     'controllers' => [
         'factories' => [
             Controller\AuthController::class => Factory\Controller\AuthControllerServiceFactory::class,
-            Controller\RegistroController::class => InvokableFactory::class,
+            //Controller\RegistroController::class => InvokableFactory::class,
         ],
         
         /*'invokables' => [

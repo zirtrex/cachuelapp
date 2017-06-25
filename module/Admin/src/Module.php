@@ -11,6 +11,8 @@ use Zend\Session\Validator\RemoteAddr;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\Sendmail;
 
 class Module
 {
@@ -56,6 +58,21 @@ class Module
                 Model\InteraccionTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     return new TableGateway('interaccion', $dbAdapter, null);
+                },
+                
+                Factory\MailFactory::class => function ($container) {
+                    $config = $container->get('config');                    
+                    $transport = new Sendmail();                    
+                    if (isset($config['mail']['transport']['options']))
+                    {
+                        //$transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));                    
+                    }
+                    else{
+                        throw new RuntimeException(sprintf(
+                            'Could not find row with identifier %d', $codEmpleo
+                            ));
+                    }                    
+                    return $transport;
                 }
             ]
         ];

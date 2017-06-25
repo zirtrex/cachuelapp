@@ -98,12 +98,7 @@ class EmpleoFilter extends InputFilter
                     )
                 )
             )
-        ));
-        
-        $this->add(array(
-            'name' => 'csrf',
-            'required' => true
-        ));        
+        ));       
         
     }
 }

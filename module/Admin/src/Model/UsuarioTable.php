@@ -32,14 +32,43 @@ class UsuarioTable
 
         return $row;
     }
+    
+    public function obtenerUsuarioPorToken($token)
+    {
+        $rowset = $this->tableGateway->select(['tokenRegistro' => $token]);
+        $row = $rowset->current();
+        if (! $row) {
+            throw new RuntimeException(sprintf(
+                'Could not find row with identifier %d', $codUsuario
+                ));
+        }
+    
+        return $row;
+    }
 
     public function guardarUsuario(Usuario $usuario)
     {
         $data = [
-            'usuario'          => $usuario->usuario,
-            'clave'            => $usuario->clave,
-            'numeroDNI'        => $usuario->numeroDNI,
-            'imagenDNI'        => $usuario->imagenDNI,
+            'usuario'           => $usuario->usuario,
+            'clave'             => $usuario->clave,
+            'nombres'           => $usuario->nombres,
+            'primerApellido'    => $usuario->primerApellido,
+            'segundoApellido'   => $usuario->segundoApellido,
+            'numeroDNI'         => $usuario->numeroDNI,            
+            'imagenDNI'         => $usuario->imagenDNI,
+            'enlaceFacebook'    => $usuario->enlaceFacebook,
+            'fechaNacimiento'   => $usuario->fechaNacimiento,
+            'correo'            => $usuario->correo,
+            'celular'           => $usuario->celular,
+            'direccion'         => $usuario->direccion,
+            'distrito'          => $usuario->distrito,
+            'departamento'      => $usuario->departamento,
+            'provincia'         => $usuario->provincia,
+            'imagenPerfil'      => $usuario->imagenPerfil,
+            'imagenAdicional'   => $usuario->imagenAdicional,            
+            'tokenRegistro'     => $usuario->tokenRegistro,
+            'fechaRegistro'     => $usuario->fechaRegistro,
+            'correoConfirmado'  => $usuario->correoConfirmado            
         ];
 
         $codUsuario = (int) $usuario->codUsuario;

@@ -38,11 +38,13 @@ return [
             ],
         ],
     ],
+    
     'controllers' => [
         'factories' => [
             //Controller\IndexController::class => InvokableFactory::class,
         ],
-    ],
+    ],  
+    
     'view_manager' => [
         'template_path_stack' => [
             'empleos' => __DIR__ . '/../view',

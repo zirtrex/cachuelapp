@@ -21,54 +21,47 @@ class AuthController extends AbstractActionController
     public function indexAction()
     {        
         $form = new \Users\Form\LoginForm();
-        $form->get('session_token')->setAttribute('value', 'hola');
           
     	$request = $this->getRequest();
         
         if ($request->isPost())
         {
-        	$form->setInputFilter(new \Users\Form\Filter\LoginFilter());        	
+        	$form->setInputFilter(new \Users\Form\Filter\LoginFilter());
+        	$form->setValidationGroup(array('usuario','clave'));
         	$form->setData($request->getPost());
             
             if ($form->isValid())
             {
-                if($form->get('session_token')->getValue() == 'hola')
-                {
             	
-	            	$formData = $form->getData();
-	                 
-	                $this->authService->getAdapter()->setIdentity($formData['usuario']);
-	                $this->authService->getAdapter()->setCredential(($formData['clave']));//md5
-	                
-	                $result = $this->authService->authenticate();
-	                
-	                if ($result->isValid())
-	                {
-	                    $resultRow = $this->authService->getAdapter()->getResultRowObject();
-	                    
-	                    $this->authService->getStorage()->write(
-	                         array(
-	                    			'codUsuario'	=> $resultRow->codUsuario,
-	                                'usuario'   	=> $formData['usuario'],
-	                                'ip_address' 	=> $this->getRequest()->getServer('REMOTE_ADDR'),
-	                                'user_agent'	=> $request->getServer('HTTP_USER_AGENT'),
-	                    	)
-	                    );
-	                     
-	                    return $this->redirect()->toRoute('home');;
-	                    
-	                }
-	                else
-	                {
-	                    $this->flashMessenger()->addErrorMessage('¡Nombre de usuario o clave incorrecta!');
-	                    return $this->redirect()->toRoute('ingresar');
-	                }
+            	$formData = $form->getData();
+                 
+                $this->authService->getAdapter()->setIdentity($formData['usuario']);
+                $this->authService->getAdapter()->setCredential(($formData['clave']));//md5
                 
+                $result = $this->authService->authenticate();
+                
+                if ($result->isValid())
+                {
+                    $resultRow = $this->authService->getAdapter()->getResultRowObject();
+                    
+                    $this->authService->getStorage()->write(
+                         array(
+                    			'codUsuario'	=> $resultRow->codUsuario,
+                                'usuario'   	=> $formData['usuario'],
+                                'ip_address' 	=> $this->getRequest()->getServer('REMOTE_ADDR'),
+                                'user_agent'	=> $request->getServer('HTTP_USER_AGENT'),
+                    	)
+                    );
+                     
+                    return $this->redirect()->toRoute('home');;
+                    
                 }
                 else
                 {
-               		throw new \Exception("La sesión no se pudo completar, intentelo de nuevo.");
+                    $this->flashMessenger()->addErrorMessage('¡Nombre de usuario o clave incorrecta!');
+                    return $this->redirect()->toRoute('ingresar');
                 }
+
             }else{
                 //throw new \Exception("Datos no validados correctamente.");
             }
