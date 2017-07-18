@@ -21,22 +21,50 @@ $this->headTitle($title);
 
 <?php if ($this->empleos):?>
 
-    <table class="uk-table">
-        <tr>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>&nbsp;</th>
-        </tr>
+    <div class="uk-child-width-1-2 uk-grid-match" uk-grid >
         <?php foreach ($this->empleos as $empleo) : ?>
-        <tr>
-            <td><?= $this->escapeHtml($empleo->titulo) ?></td>
-            <td><?= $this->escapeHtml($empleo->descripcion) ?></td>
-            <td>
-                <a href="<?= $this->url('empleos', ['action' => 'postular-empleo', 'codEmpleo' => $empleo->codEmpleo]) ?>">Ver empleo</a>
-            </td>
-        </tr>
+        <div class="uk-width-1-2@m uk-text-center">
+        	<div class="uk-card uk-card-default uk-card-body uk-card-hover">
+                <h3 class="uk-text-center"><?= $this->escapeHtml($empleo->titulo) ?></h3>
+                <hr class="uk-divider-small uk-text-center">
+                <div class="uk-margin uk-width-medium uk-margin-auto uk-text-center">
+                	<?= $this->escapeHtml($empleo->descripcion) ?>
+                </div>
+                <hr class="uk-divider-small uk-text-center">
+                <div class="uk-margin uk-width-medium uk-margin-auto uk-text-center">                	
+                    <?php
+                    $date = new DateTime($this->escapeHtml($empleo->fechaCreacion));                     
+                    ?>
+                	<span uk-icon="icon: calendar"></span> <?= $date->format('d-m-Y'); ?> | 
+                	<span uk-icon="">S/ </span><?= $this->escapeHtml($empleo->remuneracion) ?> | 
+                	<span uk-icon="clock"></span><?= $this->escapeHtml($empleo->horas) ?>
+                </div>
+                <div class="location uk-margin uk-width-medium uk-margin-auto uk-text-center">
+                	<span uk-icon="icon: location"></span> <?= $this->escapeHtml($empleo->Ubicacion->distrito) ?> - <?= $this->escapeHtml($empleo->Ubicacion->provincia) ?>
+                </div>
+                <div>
+                    <a class="uk-button uk-button-primary" href="<?= $this->url('empleos', ['action' => 'postular-empleo', 'codEmpleo' => $empleo->codEmpleo]) ?>">Ver empleo</a>
+                </div>
+            </div>
+        </div>
         <?php endforeach; ?>
-    </table>
+    </div>
+    
+     <?php
+
+     echo $this->paginationControl(
+
+         $this->empleos,
+
+         'sliding',
+
+         'partial/paginator.phtml',
+
+         array(
+             'route' => 'empleos', 'action' => 'listar-empleos'
+         )
+     );
+     ?>
     
 <?php else:?>
 	<p>¡No se han encontrado resultados!</p>

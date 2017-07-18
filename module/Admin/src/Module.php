@@ -11,7 +11,6 @@ use Zend\Session\Validator\RemoteAddr;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Transport\Sendmail;
 
 class Module
@@ -58,6 +57,17 @@ class Module
                 Model\InteraccionTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     return new TableGateway('interaccion', $dbAdapter, null);
+                },
+                
+                Model\UbicacionTable::class => function ($container) {
+                    $tableGateway = $container->get(Model\UbicacionTableGateway::class);
+                    return new Model\UbicacionTable($tableGateway);
+                },
+                Model\UbicacionTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Entity\Ubicacion());
+                    return new TableGateway('ubicacion', $dbAdapter, null, $resultSetPrototype);
                 },
                 
                 Factory\MailFactory::class => function ($container) {

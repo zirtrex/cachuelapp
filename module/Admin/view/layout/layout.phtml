@@ -13,7 +13,7 @@
         <!-- Le styles -->
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
-            ->prependStylesheet($this->basePath('css/uikit.min.css'))
+            ->prependStylesheet($this->basePath('css/uikit.css'))
         ?>
 
         <!-- Scripts -->
@@ -28,29 +28,32 @@
             <nav class="uk-navbar-container uk-margin uk-navbar" uk-navbar>        		
             	<div class="uk-navbar-left">
             		<a class="uk-navbar-item uk-logo" href="<?= $this->url('home') ?>">
-                        <img class="uk-margin-top uk-margin-bottom uk-margin-left" src="<?= $this->basePath('img/logo_original.png') ?>" width="80" alt="Cacuelapp <?= \Admin\Module::VERSION ?>"/>
-                        CACHUELAPP
+                        <img class="uk-margin-top uk-margin-bottom uk-margin-left" src="<?= $this->basePath('img/logo_original.png') ?>" width="80" alt="Cachuelapp <?= \Admin\Module::VERSION ?>"/>
+                        <span class="uk-visible@m uk-visible@l">&nbsp;&nbsp;CACHUELAPP</span>
                     </a>
                     <div class="uk-visible@m uk-visible@l">
-                        <ul class="uk-navbar-nav">                    	
-                            <li class=""><a href="<?= $this->url('home') ?>">Inicio</a></li>
-                            <li class=""><a href="<?= $this->url('empleos') ?>">Empleos</a></li>
-                            <li class=""><a href="<?= $this->url('trabajadores') ?>">Trabajadores</a></li>
-                            <li class=""><a href="<?= $this->url('home') ?>">¿Qué es cachuelapp?</a></li>
-                        </ul>
+                    	<?php 
+                    	   echo $this->navigation('navigation')
+                                  ->menu()
+                                  ->setMinDepth(0)
+                                  ->setMaxDepth(0)
+                                  ->setUlClass('uk-navbar-nav');
+                        ?>
                     </div>                    
-                </div>
-                <div class="uk-navbar-center">
-        			<?php if($this->identity()){ echo "<p>Bienvenido: <strong>" . $this->identity()['usuario'] . "</strong></p>";}?>		
-        		</div> 
-        		<div class="uk-navbar-right uk-hidden@m uk-hidden@l">
-        			<a class="uk-navbar-toggle" href="#">
+                </div>                
+        		<div class="uk-navbar-right">
+        			
+        			<div class="uk-navbar-item">
+            			<?php if($this->identity()){ echo "<div>Bienvenido: <strong>" . $this->identity()['usuario'] . "</strong></div>";}?>		
+            		</div> 
+            		
+        			<a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" href="#">
                        <span class="uk-margin-small-right">Menu</span> <span uk-navbar-toggle-icon></span> 
                     </a>
         		</div>            
             </nav>
             
-            <div class="uk-container">
+            <div class="uk-container" uk-height-viewport="offset-bottom: 32">
                 <?= $this->content ?>
             </div>    
             <hr>

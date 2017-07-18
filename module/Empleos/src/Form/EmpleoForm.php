@@ -2,14 +2,19 @@
 namespace Empleos\Form;
 
 use Zend\Form\Form;
+use Zend\Hydrator\Reflection as ReflectionHydrator;
+use Empleos\Form\Fieldset\UbicacionFieldset;
+use Admin\Entity\Empleo;
 
 
 class EmpleoForm extends Form
 {
 
-    public function __construct()
+    public function init()
     {
         parent::__construct('EmpleoForm');
+        
+        $this->setHydrator(new ReflectionHydrator(false))->setObject(new Empleo());
         
         $this->setAttributes(array(
             'method' => 'post'
@@ -115,6 +120,15 @@ class EmpleoForm extends Form
                 )
             )
         ));
+        
+        $this->add(
+            array(
+                'type' => UbicacionFieldset::class,
+                'options' => array(
+                    //'use_as_base_fieldset' => true
+                )
+            )
+        );
         
         $this->add(array(
             'name' => 'crearEmpleo',

@@ -5,14 +5,24 @@ $this->headTitle($title);
 
 <h1 class="uk-text-center"><?= $this->escapeHtml($title) ?></h1>
 
-<div class="uk-grid uk-text-center" uk-grid>
+<div class="uk-grid uk-text-center uk-grid-match" uk-grid>
     <div class="uk-width-1-2@l">
-        <h2><a href="<?= $this->url('empleos') ?>">¿Quiero ganar dinero?</a></h2>
-        <p>Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+    	<div class="uk-card uk-card-default uk-card-body uk-card-hover">
+        	<h2><a href="<?= $this->url('empleos', array('action' => 'listar-empleos')) ?>">¿Quiero ganar dinero?</a></h2>
+        	<hr class="uk-divider-small uk-text-center">
+            <div class="uk-margin uk-width-medium uk-margin-auto uk-text-center">
+    			<p>Busca trabajos eventuales, encuentra actividades afines a lo que te gusta, registrate y conéctate a nuestra red.</p>
+			</div>
+    	</div>
     </div>
     <div class="uk-width-1-2@l">
-        <h2><a href="<?= $this->url('trabajadores') ?>">¿Quiero contratar?</a></h2>
-        <p>Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+    	<div class="uk-card uk-card-default uk-card-body uk-card-hover">
+        	<h2><a href="<?= $this->url('trabajadores', array('action' => 'listar-trabajadores')) ?>">¿Quiero contratar?</a></h2>
+        	<hr class="uk-divider-small uk-text-center">
+            <div class="uk-margin uk-width-medium uk-margin-auto uk-text-center">
+        		<p>¿Necesitas una mano? Describe la labor que necesitas completar, regístrate y accede a nuestra base de datos de trabajadores.</p>
+    		</div>
+    	</div>
     </div>
 </div>
 

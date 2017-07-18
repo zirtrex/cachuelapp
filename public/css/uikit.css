@@ -50,7 +50,7 @@ a:hover {
  */
 a,
 .uk-link {
-  color: #1e87f0;
+  color: #817A74;
   text-decoration: none;
   cursor: pointer;
 }
@@ -1420,7 +1420,7 @@ a.uk-link-reset:focus,
   outline: none;
   background-color: #fff;
   color: #666;
-  border-color: #1e87f0;
+  border-color: #817A74;
 }
 /* Disabled */
 .uk-input:disabled,
@@ -1592,7 +1592,7 @@ select.uk-form-width-xsmall {
 .uk-radio:focus,
 .uk-checkbox:focus {
   outline: none;
-  border-color: #1e87f0;
+  border-color: #817A74;
 }
 /*
  * Checked
@@ -1600,7 +1600,7 @@ select.uk-form-width-xsmall {
 .uk-radio:checked,
 .uk-checkbox:checked,
 .uk-checkbox:indeterminate {
-  background-color: #1e87f0;
+  background-color: #817A74;
   border-color: transparent;
 }
 /* Focus */
@@ -1897,14 +1897,14 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-button-primary {
-  background-color: #1e87f0;
+  background-color: #817A74;
   color: #fff;
   border: 1px solid transparent;
 }
 /* Hover + Focus */
 .uk-button-primary:hover,
 .uk-button-primary:focus {
-  background-color: #0f7ae5;
+  background-color: #EF7F1A;
   color: #fff;
 }
 /* OnClick + Active */
@@ -2030,7 +2030,7 @@ select.uk-form-width-xsmall {
   line-height: 1.5;
   background: none;
   /* 2 */
-  color: #1e87f0;
+  color: #817A74;
 }
 /* Hover + Focus */
 .uk-button-link:hover,
@@ -2180,7 +2180,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-section-primary {
-  background: #1e87f0;
+  background: #817A74;
 }
 /*
  * Secondary
@@ -2632,7 +2632,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-tile-primary {
-  background: #1e87f0;
+  background: #817A74;
 }
 /*
  * Secondary
@@ -2757,7 +2757,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-card-primary {
-  background: #1e87f0;
+  background: #817A74;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -2765,7 +2765,7 @@ select.uk-form-width-xsmall {
   color: #fff;
 }
 .uk-card-primary.uk-card-hover:hover {
-  background-color: #1e87f0;
+  background-color: #817A74;
   box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
 }
 /*
@@ -3056,7 +3056,7 @@ select.uk-form-width-xsmall {
  */
 .uk-alert-primary {
   background: #d8eafc;
-  color: #1e87f0;
+  color: #817A74;
 }
 /*
  * Success
@@ -3114,7 +3114,7 @@ select.uk-form-width-xsmall {
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
-  background: #1e87f0;
+  background: #817A74;
   color: #fff;
   font-size: 0.875rem;
   /* 2 */
@@ -3143,7 +3143,7 @@ select.uk-form-width-xsmall {
 .uk-label {
   display: inline-block;
   padding: 0 10px;
-  background: #1e87f0;
+  background: #817A74;
   line-height: 1.5;
   font-size: 0.875rem;
   color: #fff;
@@ -4260,7 +4260,7 @@ ul.uk-nav-sub {
 }
 /* Active */
 .uk-subnav-pill > .uk-active > a {
-  background-color: #1e87f0;
+  background-color: #817A74;
   color: #fff;
 }
 /* Disabled
@@ -4464,7 +4464,7 @@ ul.uk-nav-sub {
 /* Active */
 .uk-tab > .uk-active > a {
   color: #333;
-  border-color: #1e87f0;
+  border-color: #817A74;
 }
 /* Disabled */
 .uk-tab > .uk-disabled > a {
@@ -5502,7 +5502,7 @@ ul.uk-nav-sub {
  * Primary
  */
 .uk-notification-message-primary {
-  color: #1e87f0;
+  color: #817A74;
 }
 /*
  * Success
@@ -5640,14 +5640,14 @@ ul.uk-nav-sub {
  * 1. Remove right border in IE11 and Edge
  */
 .uk-progress::-webkit-progress-value {
-  background-color: #1e87f0;
+  background-color: #817A74;
   transition: width 0.6s ease;
 }
 .uk-progress::-moz-progress-bar {
-  background-color: #1e87f0;
+  background-color: #817A74;
 }
 .uk-progress::-ms-fill {
-  background-color: #1e87f0;
+  background-color: #817A74;
   transition: width 0.6s ease;
   /* 1 */
   border: 0;
@@ -6925,7 +6925,7 @@ ul.uk-nav-sub {
   color: #999 !important;
 }
 .uk-text-primary {
-  color: #1e87f0 !important;
+  color: #817A74 !important;
 }
 .uk-text-success {
   color: #32d296 !important;
@@ -6951,11 +6951,11 @@ ul.uk-nav-sub {
   /* 2 */
   display: inline-block;
   /* 3 */
-  color: #1e87f0 !important;
+  color: #817A74 !important;
 }
 @supports (-webkit-background-clip: text) {
   .uk-text-background {
-    background-color: #1e87f0;
+    background-color: #817A74;
   }
 }
 /* Alignment modifiers
@@ -7319,7 +7319,7 @@ td.uk-text-break {
   background-color: #f8f8f8;
 }
 .uk-background-primary {
-  background-color: #1e87f0;
+  background-color: #817A74;
 }
 .uk-background-secondary {
   background-color: #222;

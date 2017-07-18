@@ -1,0 +1,25 @@
+<?php if ($this->pageCount): ?>
+	<hr>
+    <div class="dataTables_paginate paging_bootstrap">
+        <ul class="uk-pagination">
+            <li <?php echo!isset($this->previous) ? 'class="uk-disabled"' : ''; ?>>
+                <a href="<?php echo $this->url($this->route, array('action' => $this->action, 'page' => $this->first, 'orderby' => $orderby, 'order' => $order,)); ?>">&laquo;</a></li>
+            <li <?php echo!isset($this->previous) ? 'class="uk-disabled"' : ''; ?>>
+                <a href="<?php echo $this->url($this->route, array('action' => $this->action, 'page' => $this->previous, 'order_by' => $orderby, 'order' => $order,)); ?>">&lsaquo;</a></li>
+
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <li <?php echo $page == $this->current ? 'class="uk-active"' : ''; ?>><a href="<?php echo $this->url($this->route, array('action' => $this->action, 'page' => $page, 'orderby' => $orderby, 'order' => $order,)); ?>">
+                        <?php echo $page; ?>
+                    </a></li>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <li <?php echo!isset($this->next) ? 'class="uk-disabled"' : ''; ?>>
+                <a href="<?php echo $this->url($this->route, array('action' => $this->action, 'page' => $this->next, 'orderby' => $orderby, 'order' => $order,)); ?>">&rsaquo;</a></li>
+            <!-- Last page link -->
+            <li <?php echo!isset($this->next) ? 'class="uk-disabled"' : ''; ?>>
+                <a href="<?php echo $this->url($this->route, array('action' => $this->action, 'page' => $this->last, 'orderby' => $orderby, 'order' => $order,)); ?>">&raquo;</a></li>
+        </ul>
+    </div>
+<?php endif; ?>

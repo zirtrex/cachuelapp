@@ -21,6 +21,8 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
             'Zend\\Session\\' => 13,
             'Zend\\ServiceManager\\' => 20,
             'Zend\\Router\\' => 12,
+            'Zend\\Paginator\\' => 15,
+            'Zend\\Navigation\\' => 16,
             'Zend\\Mvc\\Plugin\\Prg\\' => 20,
             'Zend\\Mvc\\Plugin\\Identity\\' => 25,
             'Zend\\Mvc\\Plugin\\FlashMessenger\\' => 31,
@@ -98,6 +100,14 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         'Zend\\Router\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-router/src',
+        ),
+        'Zend\\Paginator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-paginator/src',
+        ),
+        'Zend\\Navigation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-navigation/src',
         ),
         'Zend\\Mvc\\Plugin\\Prg\\' => 
         array (

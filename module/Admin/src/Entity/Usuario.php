@@ -14,17 +14,14 @@ class Usuario
     public $enlaceFacebook;
     public $fechaNacimiento;
     public $correo;
-    public $celular;
-    public $direccion;
-    public $distrito;
-    public $departamento;
-    public $provincia;
+    public $celular;    
     public $imagenPerfil;
     public $imagenAdicional;
     public $fechaRegistro;
     public $tokenRegistro;
     public $correoConfirmado;
     public $Empleo; //Un usuario puede haber postulado o publicado varios empleos.
+    public $Ubicacion;
 
     public function exchangeArray(array $data)
     {
@@ -39,13 +36,16 @@ class Usuario
         $this->enlaceFacebook    = !empty($data['enlaceFacebook']) ? $data['enlaceFacebook'] : null;
         $this->fechaNacimiento   = !empty($data['fechaNacimiento']) ? $data['fechaNacimiento'] : null;
         $this->correo            = !empty($data['correo']) ? $data['correo'] : null;
-        $this->celular           = !empty($data['celular']) ? $data['celular'] : null;
-        $this->direccion         = !empty($data['direccion']) ? $data['direccion'] : null;
-        $this->distrito          = !empty($data['distrito']) ? $data['distrito'] : null;
-        $this->departamento      = !empty($data['departamento']) ? $data['departamento'] : null;
-        $this->provincia         = !empty($data['provincia']) ? $data['provincia'] : null;
+        $this->celular           = !empty($data['celular']) ? $data['celular'] : null;        
         $this->imagenPerfil      = !empty($data['imagenPerfil']) ? $data['imagenPerfil'] : null;
         $this->imagenAdicional   = !empty($data['imagenAdicional']) ? $data['imagenAdicional'] : null;
+        
+        $this->Ubicacion = new Ubicacion();
+        
+        $this->Ubicacion->codUbicacion  = !empty($data['codUbicacion']) ? $data['codUbicacion'] : null;
+        $this->Ubicacion->direccion     = !empty($data['direccion']) ? $data['direccion'] : null;
+        $this->Ubicacion->distrito      = !empty($data['distrito']) ? $data['distrito'] : null;
+        $this->Ubicacion->departamento  = !empty($data['provincia']) ? $data['provincia'] : null;
     }
 }
 

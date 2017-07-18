@@ -55,4 +55,28 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Inicio',
+                'route' => 'home',
+            ),
+            array(
+                'label' => 'Empleos',
+                'route' => 'empleos',
+                'action' => 'listar-empleos',
+            ),
+            array(
+                'label' => 'Trabajadores',
+                'route' => 'trabajadores',
+                'action' => 'listar-trabajadores',
+            ),
+            array(
+                'label' => 'Preguntas Frecuentes',
+                'route' => 'home',
+                'action' => 'index',
+            )
+        ),
+    ),
 ];

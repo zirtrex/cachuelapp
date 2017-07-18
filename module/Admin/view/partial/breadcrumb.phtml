@@ -1,0 +1,17 @@
+<ol class="breadcrumb">
+    <li>Ud. está aquí:</li>
+    
+    <?php foreach ($this->pages as $key => $page): //iterate through the pages ?>        
+        <li>
+            <?php if ($key < count($this->pages) - 1): ?>
+            
+                <a href="<?php echo $page->getHref(); ?>"><?php echo $page->getLabel(); ?></a>
+                
+            <?php else: // otherwise, just output the name ?>
+            
+                <?php echo $page->getLabel(); ?>
+                
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+</ol>
