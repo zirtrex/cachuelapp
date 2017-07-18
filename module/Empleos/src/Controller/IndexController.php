@@ -41,7 +41,7 @@ class IndexController extends AbstractActionController
         
         $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
         
-        $itemsPerPage = 3;
+        $itemsPerPage = 1;
 
         $empleos->setCurrentPageNumber($page);
 

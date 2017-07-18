@@ -19,7 +19,7 @@ class EmpleoTable
         $this->tableGateway = $tableGateway;
     }
 
-    public function obtenerTodo($paginado=false)
+    public function obtenerTodo($paginado = false)
     {
         if ($paginado) {
             
