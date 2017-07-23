@@ -47,7 +47,7 @@ class Module
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Usuario());
-                    return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('vw_usuario', $dbAdapter, null, $resultSetPrototype);
                 },
                 
                 Model\InteraccionTable::class => function ($container) {
@@ -71,29 +71,40 @@ class Module
                 },
                 
                 Factory\MailFactory::class => function ($container) {
-                    $config = $container->get('config');                    
-                    $transport = new Sendmail();                    
-                    if (isset($config['mail']['transport']['options']))
-                    {
-                        //$transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));                    
+                    $config = $container->get('config');
+                    $transport = new Sendmail();
+                    if (isset($config['mail']['transport']['options'])) {
+                        // $transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
+                    } else {
+                        throw new RuntimeException(sprintf('Could not find row with identifier %d', $codEmpleo));
                     }
-                    else{
-                        throw new RuntimeException(sprintf(
-                            'Could not find row with identifier %d', $codEmpleo
-                            ));
-                    }                    
                     return $transport;
                 }
             ]
         ];
     }
 
+    public function getViewHelperConfig()
+    {
+        return array(
+            'factories' => [
+                View\Helper\UsuarioHelper::class => function ($container) {
+                    $usuarioHelper = new View\Helper\UsuarioHelper($container);
+                    return $usuarioHelper;
+                }
+            ],
+            'aliases' => [
+                'usuario_helper' =>  View\Helper\UsuarioHelper::class                
+            ]
+        );
+    }
+
     public function onBootstrap(MvcEvent $mvcEvent)
     {
         // $this->bootstrapSession($mvcEvent);
         $this->auth = $mvcEvent->getApplication()
-                                ->getServiceManager()
-                                ->get(AuthenticationService::class);
+            ->getServiceManager()
+            ->get(AuthenticationService::class);
         
         if ($this->auth->hasIdentity()) {
             $mvcEvent->getViewModel()->setVariable('authIdentity', $this->auth->getIdentity());
@@ -103,8 +114,8 @@ class Module
     private function bootstrapSession($e)
     {
         $session = $e->getApplication()
-                        ->getServiceManager()
-                        ->get(SessionManager::class);
+            ->getServiceManager()
+            ->get(SessionManager::class);
         
         $session->start();
         

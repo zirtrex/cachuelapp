@@ -47,6 +47,7 @@ class AuthController extends AbstractActionController
                     $this->authService->getStorage()->write(
                          array(
                     			'codUsuario'	=> $resultRow->codUsuario,
+                                'rol'           => $resultRow->rol,
                                 'usuario'   	=> $formData['usuario'],
                                 'ip_address' 	=> $this->getRequest()->getServer('REMOTE_ADDR'),
                                 'user_agent'	=> $request->getServer('HTTP_USER_AGENT'),

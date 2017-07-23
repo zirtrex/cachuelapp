@@ -4,6 +4,7 @@ namespace Admin\Entity;
 class Usuario
 {
     public $codUsuario;
+    public $rol;
     public $usuario;
     public $clave;
     public $nombres;
@@ -26,6 +27,7 @@ class Usuario
     public function exchangeArray(array $data)
     {
         $this->codUsuario        = !empty($data['codUsuario']) ? $data['codUsuario'] : null;
+        $this->rol               = !empty($data['rol']) ? $data['rol'] : null;
         $this->usuario           = !empty($data['usuario']) ? $data['usuario'] : null;
         $this->clave             = !empty($data['clave']) ? $data['clave'] : null;
         $this->nombres           = !empty($data['nombres']) ? $data['nombres'] : null;
@@ -45,7 +47,8 @@ class Usuario
         $this->Ubicacion->codUbicacion  = !empty($data['codUbicacion']) ? $data['codUbicacion'] : null;
         $this->Ubicacion->direccion     = !empty($data['direccion']) ? $data['direccion'] : null;
         $this->Ubicacion->distrito      = !empty($data['distrito']) ? $data['distrito'] : null;
-        $this->Ubicacion->departamento  = !empty($data['provincia']) ? $data['provincia'] : null;
+        $this->Ubicacion->provincia     = !empty($data['provincia']) ? $data['provincia'] : null;
+        $this->Ubicacion->departamento  = !empty($data['departamento']) ? $data['departamento'] : null;
     }
 }
 

@@ -18,6 +18,7 @@
 
         <!-- Scripts -->
         <?= $this->headScript()
+            ->prependFile($this->basePath('js/users_custom.js'))
             ->prependFile($this->basePath('js/canvas.js'))
             ->prependFile($this->basePath('js/uikit-icons.min.js'))
             ->prependFile($this->basePath('js/uikit.min.js'))

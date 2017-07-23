@@ -58,7 +58,7 @@ return [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
                     ],
                     'defaults' => [
-                        'controller' => Controller\AuthController::class,
+                        'controller' => Controller\PerfilController::class,
                         'action' => 'index'
                     ],
                 ],
@@ -101,12 +101,16 @@ return [
         'factories' => [
              Storage\AuthStorage::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
              \Zend\Authentication\AuthenticationService::class => Factory\Storage\AuthenticationServiceFactory::class,
+            // Register the ImageManager service
+            Service\ImageManager::class => InvokableFactory::class,
         ],
     ],
     
     'controllers' => [
         'factories' => [
             Controller\AuthController::class => Factory\Controller\AuthControllerServiceFactory::class,
+            //Revisar Cambios desde la versión 2
+            //Controller\PerfilController::class => InvokableFactory::class,
             //Controller\RegistroController::class => InvokableFactory::class,
         ],
         
