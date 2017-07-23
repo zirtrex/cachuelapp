@@ -9,26 +9,42 @@ $this->headTitle($title);
 
 <?php if ($this->trabajadores):?>
 
-    <table class="uk-table">
-        <tr>
-            <th>Nombres</th>
-            <th>Primer Apellido</th>
-            <th>Segundo Apellido</th>
-            <th>Departamento</th>
-            <th>&nbsp;</th>
-        </tr>
+    <div class="uk-child-width-1-3 uk-grid-match" uk-grid >
         <?php foreach ($this->trabajadores as $trabajador) : ?>
-        <tr>
-            <td><?= $this->escapeHtml($trabajador->nombres) ?></td>
-            <td><?= $this->escapeHtml($trabajador->primerApellido) ?></td>
-            <td><?= $this->escapeHtml($trabajador->segundoApellido) ?></td>
-            <td><?= $this->escapeHtml($trabajador->departamento) ?></td>
-            <td>
-                <a href="<?= $this->url('trabajadores', ['action' => 'ver-trabajador', 'codTrabajador' => $trabajador->codUsuario]) ?>">Ver Ficha</a>
-            </td>
-        </tr>
+        <div class="uk-width-1-3@m uk-text-center">
+        	<div class="uk-card uk-card-default uk-card-body uk-card-hover">
+                <h3><?php echo ucfirst(strtoupper($trabajador->nombres)) . ' ' . strtoupper($trabajador->primerApellido) . ' ' . strtoupper($trabajador->segundoApellido);?></h3>
+                <hr class="uk-divider-small uk-text-center">
+                <div class="uk-cover-container uk-height-small">
+                	<canvas width="" height="180"></canvas>
+                    <img src="<?php echo $this->basepath('img/perfil/');?><?= $this->escapeHtml($trabajador->imagenPerfil) ?>" alt="" uk-cover>
+                </div>
+                <div class="uk-margin uk-width-medium uk-margin-auto uk-text-center">
+                	<?= $this->escapeHtml($trabajador->correo) ?>
+                </div> 
+                <div>               
+                    <a class="uk-button uk-button-primary" href="<?= $this->url('perfil', ['action' => 'ver-perfil', 'codUsuario' => $trabajador->codUsuario]) ?>">Ver perfil</a>
+                </div>
+            </div>
+        </div>
         <?php endforeach; ?>
-    </table>
+    </div>
+    
+     <?php
+
+     echo $this->paginationControl(
+
+         $this->trabajadores,
+
+         'sliding',
+
+         'partial/paginator.phtml',
+
+         array(
+             'route' => 'trabajadores', 'action' => 'listar-trabajadores'
+         )
+     );
+     ?>
     
 <?php else:?>
 	<p>¡No se han encontrado resultados!</p>

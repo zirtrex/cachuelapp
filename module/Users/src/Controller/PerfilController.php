@@ -95,12 +95,16 @@ class PerfilController extends AbstractActionController
     			{
     				$usuario = $editarUsuarioForm->getData();
     				
-    				$ubicacion = $usuario->Ubicacion;
-    	
-    				if($this->usuarioTable->guardarUsuario($usuario))
-    				{
-    				    if($this->ubicacionTable->guardarUbicacion($ubicacion))
-    				    {
+    				//var_dump($usuario);    				
+    				
+    				$ubicacion = $usuario->Ubicacion;    	
+    				
+				    if($codUbicacion = $this->ubicacionTable->guardarUbicacion($ubicacion))
+				    {
+				        $usuario->Ubicacion->codUbicacion = $codUbicacion;
+				        
+				        if($this->usuarioTable->guardarUsuario($usuario))
+				        {
     				        $this->flashMessenger()->addMessage('¡Sus datos han sido cambiado correctamente!');
     				        return $this->redirect()->toRoute('perfil');
     				    }				
@@ -118,13 +122,11 @@ class PerfilController extends AbstractActionController
     		$view = new ViewModel(array(
     				'editarUsuarioForm' => $editarUsuarioForm,
     				'cambiarClaveForm' => $cambiarClaveForm,
-    				'subirImagenForm' => $subirImagenForm,
     				'messages' => $this->flashmessenger()->getMessages(),
     				'errorMessages' => $this->flashmessenger()->getErrorMessages(),
     		));
     	
-    		$view->setTemplate('users/perfil/index.phtml');
-    		$this->layout('layout/layout');
+    		//$this->layout('layout/layout');
     		return $view;
     	}
     	 

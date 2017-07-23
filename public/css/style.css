@@ -1,7 +1,10 @@
-body {
-    padding-top: 10px;
-    padding-bottom: 10px;
+html {
 	background-image: url(../img/bg.jpg);
+}
+
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 h1{
@@ -58,4 +61,8 @@ li.active a{
 
 .location{
 	color: #0294D1;
+}
+
+.tm-toolbar .uk-navbar-nav > li > a, .tm-toolbar .uk-navbar-item, .tm-toolbar .uk-navbar-toggle {
+    height: 40px;
 }

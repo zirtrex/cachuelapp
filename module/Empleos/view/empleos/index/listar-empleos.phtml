@@ -9,7 +9,7 @@ $this->headTitle($title);
 
 <hr/>
 
-<?php
+	<?php
         if ($this->messages):
             foreach ($this->messages as $msg):
                 ?>
@@ -18,6 +18,17 @@ $this->headTitle($title);
             endforeach;
         endif;
    	?>
+   	<?php
+    if ($this->errorMessages):
+        foreach ($this->errorMessages as $msg):
+            ?>
+				<div class="uk-label-danger uk-padding-small uk-margin">                         
+					<?php echo $msg; ?>
+				</div>
+			<?php
+			endforeach;
+		endif;
+	?>
 
 <?php if ($this->empleos):?>
 

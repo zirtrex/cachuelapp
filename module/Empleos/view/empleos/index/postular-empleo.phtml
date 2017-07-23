@@ -17,41 +17,53 @@ $this->headTitle($title);
         <?php
         endforeach;
     endif;
-?>
+    ?>    
+    <?php
+    if ($this->errorMessages):
+        foreach ($this->errorMessages as $msg):
+            ?>
+				<div class="uk-label-danger uk-padding-small uk-margin">                         
+					<?php echo $msg; ?>
+				</div>
+			<?php
+			endforeach;
+		endif;
+	?>
+
 <div class="uk-child-width-1-1 uk-grid-match" uk-grid >
 
     <div class="uk-text-left">
     	<div class="uk-card uk-card-default uk-card-body uk-card-hover">
-    		<h3>Gracias <?= $this->usuario['usuario']; ?> por postular: <?= $this->empleo->titulo;?></h3>
+    		<h3> <?= $this->empleo->titulo;?></h3> 
             <hr class="uk-divider-small">
             <h4>Descripción del empleo</h4>
             <div class="">
-            	<?= $this->escapeHtml($empleo->descripcion) ?>
+            	<?= $this->escapeHtml($trabajador->descripcion) ?>
             </div>
             <hr class="uk-divider-small">
             <div class="uk-margin">                	
-            	<span uk-icon="icon: folder"></span><strong> Categoría:</strong> <?= $this->escapeHtml($empleo->categoria); ?>
+            	<span uk-icon="icon: folder"></span><strong> Categoría:</strong> <?= $this->escapeHtml($trabajador->categoria); ?>
             </div>
             <div class="uk-margin">                	
-            	<span uk-icon="icon: tag"></span><strong> Etiquetas:</strong> <?= $this->escapeHtml($empleo->etiquetas); ?>
+            	<span uk-icon="icon: tag"></span><strong> Etiquetas:</strong> <?= $this->escapeHtml($trabajador->etiquetas); ?>
             </div>
             <div class="uk-margin">                	
                 <?php
-                $date = new DateTime($this->escapeHtml($empleo->fechaCreacion));                     
+                $date = new DateTime($this->escapeHtml($trabajador->fechaCreacion));                     
                 ?>
             	<strong>Fecha:</strong><span uk-icon="icon: calendar"> </span> <?= $date->format('d-m-Y'); ?> | 
-            	<strong>Remuneración:</strong><span uk-icon=""> S/ </span><?= $this->escapeHtml($empleo->remuneracion) ?> | 
-            	<strong>Horas:</strong><span uk-icon="clock"> </span><?= $this->escapeHtml($empleo->horas) ?>
+            	<strong>Remuneración:</strong><span uk-icon=""> S/ </span><?= $this->escapeHtml($trabajador->remuneracion) ?> | 
+            	<strong>Horas:</strong><span uk-icon="clock"> </span><?= $this->escapeHtml($trabajador->horas) ?>
             </div>
             <div class="location uk-margin">
-            	<span uk-icon="icon: location"></span> <?= $this->escapeHtml($empleo->Ubicacion->direccion) ?> - 
-            	<?= $this->escapeHtml($empleo->Ubicacion->distrito) ?> - 
-            	<?= $this->escapeHtml($empleo->Ubicacion->provincia) ?> - 
-            	<?= $this->escapeHtml($empleo->Ubicacion->departamento) ?>
+            	<span uk-icon="icon: location"></span> <?= $this->escapeHtml($trabajador->Ubicacion->direccion) ?> - 
+            	<?= $this->escapeHtml($trabajador->Ubicacion->distrito) ?> - 
+            	<?= $this->escapeHtml($trabajador->Ubicacion->provincia) ?> - 
+            	<?= $this->escapeHtml($trabajador->Ubicacion->departamento) ?>
             </div>
             <div>
                 <a class="uk-button uk-button-primary" href="<?= $this->url('empleos', ['action' => 'listar-empleos']) ?>">Volver al listado de Empleos</a>
-                <a class="uk-button uk-button-secundary" href="<?= $this->url('home', ['action' => 'index']) ?>">Ver mis postulaciones</a>
+                <a class="uk-button uk-button-secundary" href="<?= $this->url('perfil') ?>">Ver mis postulaciones</a>
             </div>
         </div>
     </div>

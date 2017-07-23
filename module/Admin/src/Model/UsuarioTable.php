@@ -19,7 +19,7 @@ class UsuarioTable
         $this->tableGateway = $tableGateway;
     }
 
-    public function obtenerTodo()
+    public function obtenerTodo($paginado = false)
     {
         if ($paginado) {
             

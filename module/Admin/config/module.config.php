@@ -6,6 +6,7 @@ use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Admin\Factory\SessionManagerFactory;
 use Zend\Session\SessionManager;
+use Zend\Router\Http\Literal;
 
 return [
     'router' => [
@@ -17,6 +18,20 @@ return [
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                    ],
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                ],
+            ],
+            
+            'faq' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/preguntas-frecuentes',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'preguntas-frecuentes',
                     ],
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -74,8 +89,7 @@ return [
             ),
             array(
                 'label' => 'Preguntas Frecuentes',
-                'route' => 'home',
-                'action' => 'index',
+                'route' => 'faq',
             )
         ),
     ),

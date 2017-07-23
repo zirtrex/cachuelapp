@@ -13,11 +13,11 @@ return [
                 'options' => [
                     'route'    => '/empleos[/:action][/:codEmpleo][/page/:page][/orderby/:orderby][/:order]',
                     'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'codEmpleo'     => '[0-9]+',
-                        'page'    => '[0-9]+',
-                        'orderby' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'order' => 'ASC|DESC'
+                        'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'codEmpleo' => '[0-9]+',
+                        'page'      => '[0-9]+',
+                        'orderby'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'order'     => 'ASC|DESC'
                     ],
                     'defaults' => [
                         'controller' => Controller\IndexController::class,

@@ -2,6 +2,7 @@
 
 namespace Empleos\Controller;
 
+use RuntimeException;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Interop\Container\ContainerInterface;
@@ -11,6 +12,7 @@ use Admin\Model\UsuarioTable;
 use Admin\Model\InteraccionTable;
 use Admin\Model\UbicacionTable;
 use Admin\Entity\Empleo;
+use Admin\Model\Miscellanea;
 
 
 class IndexController extends AbstractActionController
@@ -41,7 +43,7 @@ class IndexController extends AbstractActionController
         
         $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
         
-        $itemsPerPage = 1;
+        $itemsPerPage = 4;
 
         $empleos->setCurrentPageNumber($page);
 
@@ -56,8 +58,20 @@ class IndexController extends AbstractActionController
     
     public function listarTrabajadoresAction()
     {
+        $trabajadores = $this->usuarioTable->obtenerTodo(true);
+        
+        $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
+        
+        $itemsPerPage = 4;
+        
+        $trabajadores->setCurrentPageNumber($page);
+        
+        $trabajadores->setItemCountPerPage($itemsPerPage);
+        
         return new ViewModel([
-            'trabajadores' => $this->usuarioTable->obtenerTodo(),
+            'trabajadores' => $trabajadores,
+            'messages' => $this->flashmessenger()->getMessages(),
+            'errorMessages' => $this->flashmessenger()->getErrorMessages()
         ]);
     }
     
@@ -127,28 +141,35 @@ class IndexController extends AbstractActionController
             $empleo = new Empleo();
             
             if (0 === $codEmpleo) {
-                return $this->redirect()->toRoute('empleo', ['action' => 'listar-empleos']);
+                return $this->redirect()->toRoute('empleos', ['action' => 'listar-empleos']);
             }
             
             try {
                 $data = $this->empleoTable->obtenerEmpleo($codEmpleo);
-            } catch (\Exception $e) {
-                return $this->redirect()->toRoute('empleo', ['action' => 'listar-empleos']);
+            } catch (RuntimeException $e) {
+                return $this->redirect()->toRoute('empleos', ['action' => 'listar-empleos']);
             }
             $empleo->exchangeArray($data);
             // \Zend\Debug\Debug::dump($empleo); return;
             
             $interaccion = array(
+                'codInteracion' => gmdate("Y-m-d H:i:s", Miscellanea::getHoraLocal(-5)),
                 'codUsuario'    => $this->identity()['codUsuario'],
                 'codEmpleo'     => $codEmpleo,
                 'estado'        => "Postulo"
             );
-            
-            $this->interaccionTable->guardarInteracion($interaccion);
+            try {
+                $this->interaccionTable->guardarInteracion($interaccion);
+            } catch (RuntimeException $e) {
+                $this->flashmessenger()->addErrorMessage("Ya ha postulado o es propietario de este empleo" . "Empleo: " . $empleo->titulo);
+                return $this->redirect()->toRoute('empleos', ['action' => 'listar-empleos']);
+            }            
 
             return new ViewModel([
                 'empleo' => $empleo,
-                'usuario' => $this->identity()
+                'usuario' => $this->identity(),
+                'messages' => $this->flashmessenger()->getMessages(),
+                'errorMessages' => $this->flashmessenger()->getErrorMessages()
             ]);
         } else {
             return $this->redirect()->toRoute('ingresar');

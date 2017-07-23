@@ -20,7 +20,7 @@ USE `cachuelapp` ;
 DROP TABLE IF EXISTS `cachuelapp`.`ubicacion` ;
 
 CREATE TABLE IF NOT EXISTS `cachuelapp`.`ubicacion` (
-  `codUbicacion` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `codUbicacion` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `direccion` VARCHAR(45) NOT NULL COMMENT '',
   `distrito` VARCHAR(45) NULL COMMENT '',
   `provincia` VARCHAR(45) NULL COMMENT '',
@@ -35,7 +35,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `cachuelapp`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `cachuelapp`.`usuario` (
-  `codUsuario` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `codUsuario` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `rol` ENUM('admin', 'user') NOT NULL COMMENT '',
   `usuario` VARCHAR(45) NOT NULL COMMENT '',
   `clave` VARCHAR(100) NOT NULL COMMENT '',
   `nombres` VARCHAR(45) NULL COMMENT '',
@@ -52,24 +53,19 @@ CREATE TABLE IF NOT EXISTS `cachuelapp`.`usuario` (
   `fechaRegistro` DATETIME NOT NULL COMMENT '',
   `tokenRegistro` VARCHAR(100) NOT NULL COMMENT '',
   `correoConfirmado` ENUM('1', '0') NOT NULL DEFAULT '0' COMMENT '',
-  `codUbicacion` INT NOT NULL COMMENT '',
+  `codUbicacion` INT NULL COMMENT '',
   PRIMARY KEY (`codUsuario`)  COMMENT '',
+  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC)  COMMENT '',
+  UNIQUE INDEX `correo_UNIQUE` (`correo` ASC)  COMMENT '',
+  UNIQUE INDEX `celular_UNIQUE` (`celular` ASC)  COMMENT '',
+  UNIQUE INDEX `numeroDNI_UNIQUE` (`numeroDNI` ASC)  COMMENT '',
+  INDEX `fk_usuario_ubicacion1_idx` (`codUbicacion` ASC)  COMMENT '',
   CONSTRAINT `fk_usuario_ubicacion1`
     FOREIGN KEY (`codUbicacion`)
     REFERENCES `cachuelapp`.`ubicacion` (`codUbicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-CREATE UNIQUE INDEX `usuario_UNIQUE` ON `cachuelapp`.`usuario` (`usuario` ASC)  COMMENT '';
-
-CREATE UNIQUE INDEX `correo_UNIQUE` ON `cachuelapp`.`usuario` (`correo` ASC)  COMMENT '';
-
-CREATE UNIQUE INDEX `celular_UNIQUE` ON `cachuelapp`.`usuario` (`celular` ASC)  COMMENT '';
-
-CREATE UNIQUE INDEX `numeroDNI_UNIQUE` ON `cachuelapp`.`usuario` (`numeroDNI` ASC)  COMMENT '';
-
-CREATE INDEX `fk_usuario_ubicacion1_idx` ON `cachuelapp`.`usuario` (`codUbicacion` ASC)  COMMENT '';
 
 
 -- -----------------------------------------------------
@@ -78,7 +74,7 @@ CREATE INDEX `fk_usuario_ubicacion1_idx` ON `cachuelapp`.`usuario` (`codUbicacio
 DROP TABLE IF EXISTS `cachuelapp`.`empleo` ;
 
 CREATE TABLE IF NOT EXISTS `cachuelapp`.`empleo` (
-  `codEmpleo` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `codEmpleo` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `titulo` VARCHAR(200) NOT NULL COMMENT '',
   `descripcion` VARCHAR(2000) NOT NULL COMMENT '',
   `remuneracion` DECIMAL NOT NULL COMMENT '',
@@ -86,16 +82,15 @@ CREATE TABLE IF NOT EXISTS `cachuelapp`.`empleo` (
   `horas` VARCHAR(3) NULL COMMENT '',
   `categoria` ENUM('PetLovers', 'Creativos', 'MilOficios') NULL COMMENT '',
   `etiquetas` VARCHAR(500) NULL COMMENT '',
-  `codUbicacion` INT NOT NULL COMMENT '',
+  `codUbicacion` INT NULL COMMENT '',
   PRIMARY KEY (`codEmpleo`)  COMMENT '',
+  INDEX `fk_empleo_ubicacion1_idx` (`codUbicacion` ASC)  COMMENT '',
   CONSTRAINT `fk_empleo_ubicacion1`
     FOREIGN KEY (`codUbicacion`)
     REFERENCES `cachuelapp`.`ubicacion` (`codUbicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-PACK_KEYS = DEFAULT;
-
-CREATE INDEX `fk_empleo_ubicacion1_idx` ON `cachuelapp`.`empleo` (`codUbicacion` ASC)  COMMENT '';
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -104,11 +99,13 @@ CREATE INDEX `fk_empleo_ubicacion1_idx` ON `cachuelapp`.`empleo` (`codUbicacion`
 DROP TABLE IF EXISTS `cachuelapp`.`interaccion` ;
 
 CREATE TABLE IF NOT EXISTS `cachuelapp`.`interaccion` (
-  `codInteracion` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `codUsuario` INT NULL COMMENT '',
-  `codEmpleo` INT NULL COMMENT '',
-  `estado` ENUM('Publico', 'Postulo') NULL COMMENT '',
+  `codInteracion` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `codUsuario` INT(11) NOT NULL COMMENT '',
+  `codEmpleo` INT(11) NOT NULL COMMENT '',
+  `estado` ENUM('Publico', 'Postulo') NOT NULL COMMENT '',
   PRIMARY KEY (`codInteracion`)  COMMENT '',
+  INDEX `fk_usuario_has_empleo_empleo1_idx` (`codEmpleo` ASC)  COMMENT '',
+  INDEX `fk_usuario_has_empleo_usuario_idx` (`codUsuario` ASC)  COMMENT '',
   CONSTRAINT `fk_usuario_has_empleo_usuario`
     FOREIGN KEY (`codUsuario`)
     REFERENCES `cachuelapp`.`usuario` (`codUsuario`)
@@ -121,10 +118,6 @@ CREATE TABLE IF NOT EXISTS `cachuelapp`.`interaccion` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_usuario_has_empleo_empleo1_idx` ON `cachuelapp`.`interaccion` (`codEmpleo` ASC)  COMMENT '';
-
-CREATE INDEX `fk_usuario_has_empleo_usuario_idx` ON `cachuelapp`.`interaccion` (`codUsuario` ASC)  COMMENT '';
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -136,6 +129,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `cachuelapp`;
 INSERT INTO `cachuelapp`.`ubicacion` (`codUbicacion`, `direccion`, `distrito`, `provincia`, `departamento`) VALUES (DEFAULT, 'Jr. Progreso S/N', 'Sunampe', 'Chincha', 'Ica');
+INSERT INTO `cachuelapp`.`ubicacion` (`codUbicacion`, `direccion`, `distrito`, `provincia`, `departamento`) VALUES (DEFAULT, 'Av. America', 'Chincha Alta', 'Chincha', 'Ica');
 
 COMMIT;
 
@@ -145,7 +139,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `cachuelapp`;
-INSERT INTO `cachuelapp`.`usuario` (`codUsuario`, `usuario`, `clave`, `nombres`, `primerApellido`, `segundoApellido`, `numeroDNI`, `imagenDNI`, `enlaceFacebook`, `fechaNacimiento`, `correo`, `celular`, `imagenPerfil`, `imagenAdicional`, `fechaRegistro`, `tokenRegistro`, `correoConfirmado`, `codUbicacion`) VALUES (DEFAULT, 'zirtrex', 'zirtrex', 'Rafael', 'Contreras', 'Martinez', '47623721', NULL, '/r.zirtrex', '1991-05-21', 'zirtrex@live.com', '966102508', NULL, NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO `cachuelapp`.`usuario` (`codUsuario`, `rol`, `usuario`, `clave`, `nombres`, `primerApellido`, `segundoApellido`, `numeroDNI`, `imagenDNI`, `enlaceFacebook`, `fechaNacimiento`, `correo`, `celular`, `imagenPerfil`, `imagenAdicional`, `fechaRegistro`, `tokenRegistro`, `correoConfirmado`, `codUbicacion`) VALUES (DEFAULT, 'admin', 'zirtrex', 'zirtrex', 'Rafael', 'Contreras', 'Martinez', '47623721', NULL, '/r.zirtrex', '1991-05-21', 'zirtrex@live.com', '966102508', 'zirtrex.jpg', NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO `cachuelapp`.`usuario` (`codUsuario`, `rol`, `usuario`, `clave`, `nombres`, `primerApellido`, `segundoApellido`, `numeroDNI`, `imagenDNI`, `enlaceFacebook`, `fechaNacimiento`, `correo`, `celular`, `imagenPerfil`, `imagenAdicional`, `fechaRegistro`, `tokenRegistro`, `correoConfirmado`, `codUbicacion`) VALUES (DEFAULT, 'user', 'usuario1', 'usuario1', 'Jorge', 'Fernandez', 'Sierra', '45896321', NULL, NULL, '1980-04-30', 'usuario@correo.com', '985745236', 'usuario.jpg', NULL, DEFAULT, DEFAULT, DEFAULT, 1);
 
 COMMIT;
 
@@ -158,6 +153,8 @@ USE `cachuelapp`;
 INSERT INTO `cachuelapp`.`empleo` (`codEmpleo`, `titulo`, `descripcion`, `remuneracion`, `fechaCreacion`, `horas`, `categoria`, `etiquetas`, `codUbicacion`) VALUES (DEFAULT, 'Cuidar a mis perritos', 'Cuidar perritos por algunas horas', 20.00, NULL, NULL, 'PetLovers', NULL, 1);
 INSERT INTO `cachuelapp`.`empleo` (`codEmpleo`, `titulo`, `descripcion`, `remuneracion`, `fechaCreacion`, `horas`, `categoria`, `etiquetas`, `codUbicacion`) VALUES (DEFAULT, 'Diseñar un logo', 'Diseñar un logo para mi negocio familiar', 50.00, NULL, NULL, 'Creativos', NULL, 1);
 INSERT INTO `cachuelapp`.`empleo` (`codEmpleo`, `titulo`, `descripcion`, `remuneracion`, `fechaCreacion`, `horas`, `categoria`, `etiquetas`, `codUbicacion`) VALUES (DEFAULT, 'Pintar mi casa', 'Pintar mi casa de color verder', 40.00, NULL, NULL, 'MilOficios', NULL, 1);
+INSERT INTO `cachuelapp`.`empleo` (`codEmpleo`, `titulo`, `descripcion`, `remuneracion`, `fechaCreacion`, `horas`, `categoria`, `etiquetas`, `codUbicacion`) VALUES (DEFAULT, 'Cortar el Cespéd', 'Cortar el cespéd verde de mi casa roja que queda al lado de la casa de mi venico', 25.00, NULL, NULL, 'MilOficios', 'Cespéd, Casa, Vecino', 2);
+INSERT INTO `cachuelapp`.`empleo` (`codEmpleo`, `titulo`, `descripcion`, `remuneracion`, `fechaCreacion`, `horas`, `categoria`, `etiquetas`, `codUbicacion`) VALUES (DEFAULT, 'Enseñarme Matemáticas', 'Quiero aprendar matemáticas por mi cuenta y busco docente', 80.00, NULL, '1', 'MilOficios', 'Mate, Enseñar', 2);
 
 COMMIT;
 
@@ -170,6 +167,12 @@ USE `cachuelapp`;
 INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 1, 'Publico');
 INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 2, 'Publico');
 INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 3, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 1, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 2, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 3, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 4, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 5, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 4, 'Postulo');
 
 COMMIT;
 

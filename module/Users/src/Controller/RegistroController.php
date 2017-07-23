@@ -43,6 +43,7 @@ class RegistroController extends AbstractActionController
                     
                     $usuario->exchangeArray($data);
                     
+                    $usuario->rol = 'user';
                     $usuario->tokenRegistro = md5(uniqid(mt_rand(), true));
                     $usuario->fechaRegistro = gmdate("Y-m-d H:i:s", Miscellanea::getHoraLocal(-5));
                     $usuario->correoConfirmado = '0';
