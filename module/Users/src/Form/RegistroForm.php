@@ -13,6 +13,7 @@ class RegistroForm extends Form
         $this->setAttributes(array(
             'method' => 'post',
             'class' => 'uk-form',
+            'id' => 'registro-form'
         ));
         
         $this->add(array(
@@ -170,38 +171,16 @@ class RegistroForm extends Form
                 )
             )
         ));
-        
-        /*
-         * $this->add(array(
-         * 'type' => 'captcha',
-         * 'name' => 'captcha',
-         * 'attributes' => array(
-         * 'placeholder' => 'Ingresa el código de la imagen',
-         * 'required' => 'required',
-         * 'class' => 'uk-input uk-form-width-medium'
-         * ),
-         * 'options' => [
-         * 'label' => 'Ingresa el código generado',
-         * 'captcha' => [
-         * 'class' => 'Figlet',
-         * 'wordLen' => 6,
-         * 'expiration' => 600,
-         * ],
-         * 'label_attributes' => array(
-         * 'class' => 'col-sm-3 control-label'
-         * )
-         * ]
-         * ));
-         */
-        
-        
+
         $this->add(array(
             'name' => 'registrarse',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
                 'value' => 'Registrarse',
-                'class' => 'uk-button uk-button-primary',
-                'id' => 'registrarse'
+                'id' => 'registrarse',
+                'class' => 'uk-button uk-button-primary g-recaptcha',
+                'data-sitekey' => "6LfTHyoUAAAAAJ4gsti7C_4r1CQnUyRHdysCymMJ",
+                'data-callback' => "onSubmit"
             )
         ));
     }

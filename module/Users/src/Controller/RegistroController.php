@@ -32,29 +32,43 @@ class RegistroController extends AbstractActionController
             $request = $this->getRequest();
             
             if ($request->isPost()) {
+                
                 $form->setInputFilter(new \Users\Form\Filter\RegistroFilter($this->dbAdapter));
                 $form->setData($request->getPost());
                 
-                if ($form->isValid())
-                {      
-                    $data = $form->getData();
-                    
-                    $usuario = new Usuario();
-                    
-                    $usuario->exchangeArray($data);
-                    
-                    $usuario->rol = 'user';
-                    $usuario->tokenRegistro = md5(uniqid(mt_rand(), true));
-                    $usuario->fechaRegistro = gmdate("Y-m-d H:i:s", Miscellanea::getHoraLocal(-5));
-                    $usuario->correoConfirmado = '0';
-                    
-                    $this->usuarioTable->guardarUsuario($usuario);
-                    
-                    $this->enviarCorreoConfirmacion($usuario);                        
-                    $this->flashMessenger()->addMessage('Se ha enviado un mensaje a '.$usuario->correo. ', por favor confirmar. Si no lo ha recibido aún, verifique la carpeta de spam');
-                    return $this->redirect()->toRoute('registro');
+                $secret = '6LfTHyoUAAAAAG1DhEEmXyA5uNZdKEVWZf8j7RMQ';
+                
+                $gRecaptchaResponse = isset($_POST["g-recaptcha-response"])? $_POST["g-recaptcha-response"] : null;
+                	
+                $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+                	
+                $resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
+                
+                if ($resp->isSuccess()) {
+                
+                    if ($form->isValid())
+                    {      
+                        $data = $form->getData();
+                        
+                        $usuario = new Usuario();
+                        
+                        $usuario->exchangeArray($data);
+                        
+                        $usuario->rol = 'user';
+                        $usuario->tokenRegistro = md5(uniqid(mt_rand(), true));
+                        $usuario->fechaRegistro = gmdate("Y-m-d H:i:s", Miscellanea::getHoraLocal(-5));
+                        $usuario->correoConfirmado = '0';
+                        
+                        $this->usuarioTable->guardarUsuario($usuario);
+                        
+                        $this->enviarCorreoConfirmacion($usuario);                        
+                        $this->flashMessenger()->addMessage('Se ha enviado un mensaje a '.$usuario->correo. ', por favor confirmar. Si no lo ha recibido aún, verifique la carpeta de spam');
+                        return $this->redirect()->toRoute('registro');
+                    }
+                    //\Zend\Debug\Debug::dump($form->getInputFilter()->getMessages());
+                } else {
+                    $form->get('registrarse')->setMessages(array('No ha sobrepasado nuestros filtros de seguridad, vuelva a intentarlo por favor.', 'Verifique que tenga javascript activo.'));
                 }
-                //\Zend\Debug\Debug::dump($form->getInputFilter()->getMessages());
 
             }
             

@@ -48,7 +48,7 @@
             			<ul class="uk-navbar-nav">
             				<?php if($this->identity()):?>
                 				<li><a href="<?= $this->url('perfil') ?>" class="">
-                					<span uk-icon="icon: user"></span>Bienvenido: <strong> <?= $this->identity()['usuario'] ?></strong></a>
+                					<span uk-icon="icon: user"></span>Bienvenido: &nbsp;&nbsp;<strong> <?= $this->identity()['usuario'] ?></strong></a>
                 					<div class="uk-navbar-dropdown uk-background-secondary">
                 						<ul class="uk-nav uk-navbar-dropdown-nav">
                 							<li><a href="<?= $this->url('perfil') ?>" class="">Perfil</a></li>

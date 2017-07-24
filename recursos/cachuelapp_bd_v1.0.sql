@@ -99,11 +99,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `cachuelapp`.`interaccion` ;
 
 CREATE TABLE IF NOT EXISTS `cachuelapp`.`interaccion` (
-  `codInteracion` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `codInteracion` DATETIME NULL COMMENT '',
   `codUsuario` INT(11) NOT NULL COMMENT '',
   `codEmpleo` INT(11) NOT NULL COMMENT '',
   `estado` ENUM('Publico', 'Postulo') NOT NULL COMMENT '',
-  PRIMARY KEY (`codInteracion`)  COMMENT '',
+  PRIMARY KEY (`codUsuario`, `codEmpleo`)  COMMENT '',
   INDEX `fk_usuario_has_empleo_empleo1_idx` (`codEmpleo` ASC)  COMMENT '',
   INDEX `fk_usuario_has_empleo_usuario_idx` (`codUsuario` ASC)  COMMENT '',
   CONSTRAINT `fk_usuario_has_empleo_usuario`
@@ -141,6 +141,7 @@ START TRANSACTION;
 USE `cachuelapp`;
 INSERT INTO `cachuelapp`.`usuario` (`codUsuario`, `rol`, `usuario`, `clave`, `nombres`, `primerApellido`, `segundoApellido`, `numeroDNI`, `imagenDNI`, `enlaceFacebook`, `fechaNacimiento`, `correo`, `celular`, `imagenPerfil`, `imagenAdicional`, `fechaRegistro`, `tokenRegistro`, `correoConfirmado`, `codUbicacion`) VALUES (DEFAULT, 'admin', 'zirtrex', 'zirtrex', 'Rafael', 'Contreras', 'Martinez', '47623721', NULL, '/r.zirtrex', '1991-05-21', 'zirtrex@live.com', '966102508', 'zirtrex.jpg', NULL, DEFAULT, DEFAULT, DEFAULT, 1);
 INSERT INTO `cachuelapp`.`usuario` (`codUsuario`, `rol`, `usuario`, `clave`, `nombres`, `primerApellido`, `segundoApellido`, `numeroDNI`, `imagenDNI`, `enlaceFacebook`, `fechaNacimiento`, `correo`, `celular`, `imagenPerfil`, `imagenAdicional`, `fechaRegistro`, `tokenRegistro`, `correoConfirmado`, `codUbicacion`) VALUES (DEFAULT, 'user', 'usuario1', 'usuario1', 'Jorge', 'Fernandez', 'Sierra', '45896321', NULL, NULL, '1980-04-30', 'usuario@correo.com', '985745236', 'usuario.jpg', NULL, DEFAULT, DEFAULT, DEFAULT, 1);
+INSERT INTO `cachuelapp`.`usuario` (`codUsuario`, `rol`, `usuario`, `clave`, `nombres`, `primerApellido`, `segundoApellido`, `numeroDNI`, `imagenDNI`, `enlaceFacebook`, `fechaNacimiento`, `correo`, `celular`, `imagenPerfil`, `imagenAdicional`, `fechaRegistro`, `tokenRegistro`, `correoConfirmado`, `codUbicacion`) VALUES (DEFAULT, 'user', 'usuario2', 'usuario2', 'Carlos', 'Yarleque', 'Yarleque', '25632156', NULL, 'facebook.com/yarleque', '1990-09-14', 'usuario2@correo.com', '965823695', 'usuario2.png', NULL, DEFAULT, DEFAULT, DEFAULT, 2);
 
 COMMIT;
 
@@ -164,15 +165,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `cachuelapp`;
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 1, 'Publico');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 2, 'Publico');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 3, 'Publico');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 1, 'Postulo');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 2, 'Postulo');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 3, 'Postulo');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 4, 'Publico');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 2, 5, 'Publico');
-INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (DEFAULT, 1, 4, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 1, 1, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 1, 2, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 1, 3, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 2, 1, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 2, 2, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 2, 3, 'Postulo');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 2, 4, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 2, 5, 'Publico');
+INSERT INTO `cachuelapp`.`interaccion` (`codInteracion`, `codUsuario`, `codEmpleo`, `estado`) VALUES (NULL, 1, 4, 'Postulo');
 
 COMMIT;
 

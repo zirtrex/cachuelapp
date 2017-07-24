@@ -12,7 +12,7 @@ class LoginForm extends Form
     {
         parent::__construct('LoginForm');
  
-        $this->setAttributes(array('method' => 'post',));
+        $this->setAttributes(array('method' => 'post', 'id' => 'loginForm'));
  
         $this->add(
             array(
@@ -61,8 +61,10 @@ class LoginForm extends Form
                 'type' => 'Zend\Form\Element\Submit',
                 'attributes' => array(
                     'value' => 'Ingresar',
-                    'class' => 'uk-button uk-button-primary',
                     'id' => 'ingresar',
+                    'class' => 'uk-button uk-button-primary g-recaptcha',                    
+                    'data-sitekey' => "6LfTHyoUAAAAAJ4gsti7C_4r1CQnUyRHdysCymMJ",
+                    'data-callback' => "onSubmit"
                 ),
             )
         ); 

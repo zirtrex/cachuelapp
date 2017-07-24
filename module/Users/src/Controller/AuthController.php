@@ -29,43 +29,56 @@ class AuthController extends AbstractActionController
         	$form->setInputFilter(new \Users\Form\Filter\LoginFilter());
         	$form->setValidationGroup(array('usuario','clave'));
         	$form->setData($request->getPost());
-            
-            if ($form->isValid())
-            {
-            	
-            	$formData = $form->getData();
-                 
-                $this->authService->getAdapter()->setIdentity($formData['usuario']);
-                $this->authService->getAdapter()->setCredential(($formData['clave']));//md5
-                
-                $result = $this->authService->authenticate();
-                
-                if ($result->isValid())
-                {
-                    $resultRow = $this->authService->getAdapter()->getResultRowObject();
-                    
-                    $this->authService->getStorage()->write(
-                         array(
-                    			'codUsuario'	=> $resultRow->codUsuario,
-                                'rol'           => $resultRow->rol,
-                                'usuario'   	=> $formData['usuario'],
-                                'ip_address' 	=> $this->getRequest()->getServer('REMOTE_ADDR'),
-                                'user_agent'	=> $request->getServer('HTTP_USER_AGENT'),
-                    	)
-                    );
-                     
-                    return $this->redirect()->toRoute('home');;
-                    
-                }
-                else
-                {
-                    $this->flashMessenger()->addErrorMessage('¡Nombre de usuario o clave incorrecta!');
-                    return $this->redirect()->toRoute('ingresar');
-                }
+        	
+        	$secret = '6LfTHyoUAAAAAG1DhEEmXyA5uNZdKEVWZf8j7RMQ';        	
 
-            }else{
-                //throw new \Exception("Datos no validados correctamente.");
-            }
+    	    $gRecaptchaResponse = isset($_POST["g-recaptcha-response"])? $_POST["g-recaptcha-response"] : null;
+    	    
+    	    $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+    	    
+    	    $resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
+    	    
+    	    if ($resp->isSuccess()) {
+    	        
+        	    if ($form->isValid())
+                {
+                	
+                	$formData = $form->getData();
+                     
+                    $this->authService->getAdapter()->setIdentity($formData['usuario']);
+                    $this->authService->getAdapter()->setCredential(($formData['clave']));//md5
+                    
+                    $result = $this->authService->authenticate();
+                    
+                    if ($result->isValid())
+                    {
+                        $resultRow = $this->authService->getAdapter()->getResultRowObject();
+                        
+                        $this->authService->getStorage()->write(
+                             array(
+                        			'codUsuario'	=> $resultRow->codUsuario,
+                                    'rol'           => $resultRow->rol,
+                                    'usuario'   	=> $formData['usuario'],
+                                    'ip_address' 	=> $this->getRequest()->getServer('REMOTE_ADDR'),
+                                    'user_agent'	=> $request->getServer('HTTP_USER_AGENT'),
+                        	)
+                        );
+                         
+                        return $this->redirect()->toRoute('home');;
+                        
+                    }
+                    else
+                    {
+                        $this->flashMessenger()->addErrorMessage('¡Nombre de usuario o clave incorrecta!');
+                        return $this->redirect()->toRoute('ingresar');
+                    }
+    
+                }else{
+                    //throw new \Exception("Datos no validados correctamente.");
+                }
+    	    } else {
+    	        $form->get('ingresar')->setMessages(array('No ha sobrepasado nuestros filtros de seguridad, vuelva a intentarlo por favor.', 'Verifique que tenga javascript activo.'));
+    	    } 
         }
         
         //$this->layout('layout/login');

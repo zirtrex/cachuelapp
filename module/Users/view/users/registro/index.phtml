@@ -4,6 +4,13 @@ $form->setAttribute('action', $this->url('registro', array('controller' => 'inde
 $form->prepare();
 ?>
 
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+   function onSubmit(token) {
+     document.getElementById("registro-form").submit();
+   }
+ </script>
+
 <div class="">
 	<div class="uk-h3"><i uk-icon="icon: unlock"></i>Registro</div>
 
@@ -27,6 +34,12 @@ $form->prepare();
             endforeach;
         endif;
    	?>
+   	
+    <?php echo $this->formElementErrors()
+                ->setMessageOpenFormat('<div class="uk-label-danger uk-padding-small uk-margin">')
+                ->setMessageSeparatorString('</div><div class="uk-label-danger uk-padding-small uk-margin">')
+                ->setMessageCloseString('</div>')
+                ->render($form->get('registrarse'));?>
 	
     <div class="uk-grid" uk-grid>
     

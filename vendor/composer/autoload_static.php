@@ -54,6 +54,10 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         array (
             'Users\\' => 6,
         ),
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
         'P' => 
         array (
             'Psr\\Container\\' => 14,
@@ -217,6 +221,10 @@ class ComposerStaticInit57a9481d72b2629badbf88d14700ce5a
         'Users\\' => 
         array (
             0 => __DIR__ . '/../..' . '/module/Users/src',
+        ),
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
         'Psr\\Container\\' => 
         array (
