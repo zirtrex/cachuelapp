@@ -11,6 +11,24 @@ $usuario = $this->usuario_helper($this->identity()['codUsuario'], $this->identit
 		<div class="box-title">
 			<h3>Perfil de usuario</h3>
 		</div>
+		<?php
+            if ($this->messages):
+                foreach ($this->messages as $msg):
+                    ?>
+                    <div class="uk-label-success uk-padding-small uk-margin"> <?php echo $msg; ?></div>
+                <?php
+                endforeach;
+            endif;
+       	?>
+    	<?php
+            if ($this->errorMessages):
+                foreach ($this->errorMessages as $msg):
+                    ?>
+                    <div class="uk-label-danger uk-padding-small uk-margin"><?php echo $msg; ?></div>
+                <?php
+                endforeach;
+            endif;
+       	?>
 		<div class="box-body padding-md"> <!-- DIV BODY END -->
 			<div class="uk-card uk-card-default uk-card-body">
 			<div  uk-grid> <!-- IMAGEN + PERFIL -->
@@ -21,22 +39,27 @@ $usuario = $this->usuario_helper($this->identity()['codUsuario'], $this->identit
 						$subirImagenForm->prepare();
 					?>
 					<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-					<?php echo $this->form()->openTag($subirImagenForm);?>
+					
 						<div id="profile" class="uk-inline-clip uk-transition-toggle">
 							<a href="javascript:void(0);">
-								<img src="<?php echo $this->basepath('img/perfil/');?><?php echo ($usuario->imagenPerfil == 'default') ? 'default.png' :  $usuario->imagenPerfil; ?>" class="profile-image img-rounded img-responsive" id="profileImg" width="200" height="auto"/>
+								<div class="uk-cover-container uk-height-small">
+									<canvas width="" height="180"></canvas>
+									<img src="<?php echo $this->basepath('img/perfil/');?><?php echo ($usuario->imagenPerfil == 'default') ? 'default.png' :  $usuario->imagenPerfil; ?>" class="profile-image img-rounded img-responsive" id="profileImg" uk-cover/>
+								</div>
 								<div  class="uk-overlay uk-overlay-default uk-transition-slide-bottom uk-position-bottom">
                                     <strong id="uploadTrigger"><span uk-icon="icon: camera"></span>Cambiar</b></strong>
+                                	<?php echo $this->form()->openTag($subirImagenForm);?>
                                 	<div class="uk-form-custom uk-hidden">
         								<?php echo $this->formFile($subirImagenForm->get('imagen')); ?>
         								<button class="uk-button uk-button-default" type="button" tabindex="-1"></button>
     								</div>
+    								<?php echo $this->form()->closeTag(); ?>
                                 </div>
 							</a>
 						</div>
 						<div style="top: 2px;"></div>
 						<div id="mensaje"></div>
-					<?php echo $this->form()->closeTag(); ?>
+					
 				</div>
 
 				<div class="uk-width-3-4@l">

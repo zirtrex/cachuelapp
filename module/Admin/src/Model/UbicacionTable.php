@@ -56,7 +56,9 @@ class UbicacionTable
             ));
         }
 
-        return $this->tableGateway->update($data, ['codUbicacion' => $codUbicacion]);
+        $this->tableGateway->update($data, ['codUbicacion' => $codUbicacion]);
+        
+        return $codUbicacion;
     }
 
     public function eliminarUbicacion($codUbicacion)

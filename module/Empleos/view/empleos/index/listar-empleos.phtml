@@ -34,7 +34,7 @@ $this->headTitle($title);
 
     <div class="uk-child-width-1-2 uk-grid-match" uk-grid >
         <?php foreach ($this->empleos as $empleo) : ?>
-        <div class="uk-width-1-2@m uk-text-center">
+        <div class="uk-width-1-2@m uk-text-center uk-margin">
         	<div class="uk-card uk-card-default uk-card-body uk-card-hover">
                 <h3 class="uk-text-center"><?= $this->escapeHtml($empleo->titulo) ?></h3>
                 <hr class="uk-divider-small uk-text-center">

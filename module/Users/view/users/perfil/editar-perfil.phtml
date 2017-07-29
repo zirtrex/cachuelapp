@@ -17,28 +17,23 @@ $usuario = $this->usuario_helper($this->identity()['codUsuario'], $this->identit
 			<div class="uk-margin">
 				<div class="col-md-12">
 					<?php
-						if ($this->messages):
-							foreach ($this->messages as $msg):
-								?>
-								<div class="uk-text-success">                                        
-									<?php echo $msg; ?>
-								</div>
-							<?php
-							endforeach;
-						endif;
-					?>
-					
-					<?php
-						if ($this->errorMessages):
-							foreach ($this->errorMessages as $msg):
-								?>
-								<div class="uk-text-danger">                         
-									<?php echo $msg; ?>
-								</div>
-							<?php
-							endforeach;
-						endif;
-					?>	
+                        if ($this->messages):
+                            foreach ($this->messages as $msg):
+                                ?>
+                                <div class="uk-label-success uk-padding-small uk-margin"> <?php echo $msg; ?></div>
+                            <?php
+                            endforeach;
+                        endif;
+                   	?>
+                	<?php
+                        if ($this->errorMessages):
+                            foreach ($this->errorMessages as $msg):
+                                ?>
+                                <div class="uk-label-danger uk-padding-small uk-margin"><?php echo $msg; ?></div>
+                            <?php
+                            endforeach;
+                        endif;
+                   	?>	
 				</div>
 			</div>
 			

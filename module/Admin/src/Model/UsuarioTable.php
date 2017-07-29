@@ -93,12 +93,12 @@ class UsuarioTable
         
         $sql = new Sql($this->tableGateway->getAdapter());
         
-        if ($codUsuario === 0) {
-            
+        if ($codUsuario === 0) {            
             $insert = $sql->insert('usuario');
             $insert->values($data);            
             $statement = $sql->prepareStatementForSqlObject($insert);
-            return $row = $statement->execute();
+            $row = $statement->execute();
+            return $this->tableGateway->lastInsertValue;
         }
 
         if (! $this->obtenerUsuario($codUsuario)) {
@@ -109,7 +109,10 @@ class UsuarioTable
         $update = $sql->update('usuario');
         $update->set($data)->where(['codUsuario' => $codUsuario]);
         $statement = $sql->prepareStatementForSqlObject($update);
-        return $row = $statement->execute();
+        
+        $row = $statement->execute();
+        
+        return $codUsuario;
     }
     
     public function guardarUsuarioImagen(Usuario $usuario)

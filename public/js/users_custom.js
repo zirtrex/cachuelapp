@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	
-	var base = window.location.protocol + "//" + window.location.host + "/cachuelapp/public/";
+	var base = window.location.protocol + "//" + window.location.host + "/";
 
     $("#uploadTrigger").on('click', function(event) {
         $("#imagen").trigger('click');

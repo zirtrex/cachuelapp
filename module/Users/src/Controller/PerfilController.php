@@ -93,14 +93,12 @@ class PerfilController extends AbstractActionController
     			 
     			if ($editarUsuarioForm->isValid())
     			{
-    				$usuario = $editarUsuarioForm->getData();
+    				$usuario = $editarUsuarioForm->getData();				
     				
-    				//var_dump($usuario);    				
-    				
-    				$ubicacion = $usuario->Ubicacion;    	
+    				$ubicacion = $usuario->Ubicacion;
     				
 				    if($codUbicacion = $this->ubicacionTable->guardarUbicacion($ubicacion))
-				    {
+				    {				        
 				        $usuario->Ubicacion->codUbicacion = $codUbicacion;
 				        
 				        if($this->usuarioTable->guardarUsuario($usuario))

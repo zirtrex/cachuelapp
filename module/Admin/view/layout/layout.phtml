@@ -11,7 +11,7 @@
         ?>
 
         <!-- Le styles -->
-        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'])
             ->prependStylesheet($this->basePath('css/style.css'))
             ->prependStylesheet($this->basePath('css/uikit.css'))
         ?>
@@ -68,8 +68,8 @@
             <nav class="uk-navbar-container uk-margin-bottom" uk-navbar>        		
             	<div class="uk-navbar-left">
             		<a class="uk-navbar-item uk-logo" href="<?= $this->url('home') ?>">
-                        <img class="uk-margin-top uk-margin-bottom uk-margin-left" src="<?= $this->basePath('img/logo_original.png') ?>" width="80" alt="Cachuelapp <?= \Admin\Module::VERSION ?>"/>
-                        <span class="uk-visible@m uk-visible@l">&nbsp;&nbsp;</span>
+                        <img class="uk-margin-top uk-margin-bottom" src="<?= $this->basePath('img/Logo_I.png') ?>" width="80" alt="Cachuelapp <?= \Admin\Module::VERSION ?>"/>
+                        <span class=""><img class="uk-margin-top uk-margin-bottom" src="<?= $this->basePath('img/Logo_T.png') ?>" width="140" alt="Cachuelapp <?= \Admin\Module::VERSION ?>"/></span>
                     </a>                                        
                 </div>                
         		<div class="uk-navbar-right">
